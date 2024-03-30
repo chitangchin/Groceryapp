@@ -11,6 +11,10 @@ pool.connect()
     .then(() => console.log('Connected to DB'))
     .catch((err) => console.error('DB not connected', err));
 
+const ownedRouter = require('./routes/ownedRouter');
+
+app.use('/owned', ownedRouter);
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });

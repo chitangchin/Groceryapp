@@ -45,6 +45,17 @@ ownedRouter
                 }
             })
             .catch((err) => next(err));
+    })
+    .put((req, res) => {
+        res.statusCode = 403;
+        res.end('PUT operation not supported on this route');
+    })
+    .delete((req, res, next) => {
+        pool.query('DELETE FROM ingredients_owned WHERE user_id = $1;', [
+            req.params.userId,
+        ])
+            .then(() => res.end('All ingredients deleted from list.'))
+            .catch((err) => next(err));
     });
 
 ownedRouter
@@ -68,6 +79,26 @@ ownedRouter
                     return res.json(err_msg);
                 }
             })
+            .catch((err) => next(err));
+    })
+    .post((req, res) => {
+        res.statusCode = 403;
+        res.end('POST operation not supported on this route');
+    })
+    .put((req, res) => {
+        res.statusCode = 403;
+        res.end('PUT operation not supported on this route');
+    })
+    .delete((req, res, next) => {
+        pool.query(
+            'DELETE FROM ingredients_owned WHERE user_id = $1 AND ingredient_id = $2',
+            [req.params.userId, req.params.ingredientId]
+        )
+            .then(() =>
+                res.end(
+                    `Ingredient ${req.params.ingredientId} deleted from list.`
+                )
+            )
             .catch((err) => next(err));
     });
 

@@ -1,5 +1,6 @@
 const express = require('express');
 const { pool } = require('../db_config');
+const format = require('pg-format');
 const ownedRouter = express.Router();
 
 ownedRouter
@@ -19,31 +20,30 @@ ownedRouter
                     res.json(result.rows);
                 } else {
                     res.statusCode = 404;
-                    err_msg = `User ${req.params.userId} owns no ingredients.`;
+                    err_msg = `User ${req.params.userId} owns no ingredients or does not exist.`;
                     return res.json(err_msg);
                 }
             })
             .catch((err) => next(err));
     })
     .post((req, res, next) => {
-        pool.query(
-            'SELECT * FROM ingredients_owned WHERE user_id = $1 AND ingredient_id = $2;',
-            [req.params.userId, req.body.ingredientId]
-        )
-            .then((result) => {
-                if (!result.rowCount) {
-                    pool.query(
-                        'INSERT INTO ingredients_owned (user_id, ingredient_id) VALUES ($1,$2);',
-                        [req.params.userId, req.body.ingredientId]
-                    ).then(() =>
-                        res.end(
-                            `Added ingredient ${req.body.ingredientId} to list`
-                        )
-                    );
-                } else {
-                    res.end('Item already in list');
-                }
-            })
+        queryParameters = [];
+
+        for (index in req.body.ingredientId) {
+            queryParameters.push([
+                req.params.userId,
+                req.body.ingredientId[index],
+            ]);
+        }
+
+        insertQuery = format(
+            'INSERT INTO ingredients_owned (user_id, ingredient_id) VALUES %L',
+            queryParameters
+        );
+        pool.query(insertQuery)
+            .then(() =>
+                res.end(`Added ingredient ${req.body.ingredientId} to list`)
+            )
             .catch((err) => next(err));
     })
     .put((req, res) => {

@@ -5,7 +5,8 @@
   "scripts": {
 
 
-    "dev": "node server.js",
+    "dev": "next dev && node ../Server/server.js",
+    "server": "node ../Server/server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

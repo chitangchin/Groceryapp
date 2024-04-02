@@ -2,6 +2,7 @@ const express = require('express');
 const { pool } = require('../db_config');
 const format = require('pg-format');
 const ownedRouter = express.Router();
+const auth = require('../middleware/auth');
 
 ownedRouter
     .route('/:userId')

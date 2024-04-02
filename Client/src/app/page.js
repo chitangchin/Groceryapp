@@ -2,6 +2,15 @@
 
 import Link from "next/link";
 export default function Home() {
+
+async function test(url) {
+  const response = await fetch(url);
+  const data = await response.text();
+  console.log(data);
+}
+
+test("http://localhost:3001/");
+
   return (
    
     <>

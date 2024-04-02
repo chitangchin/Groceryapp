@@ -1,22 +1,22 @@
 {
   "pages": {
     "/_not-found": [
-      "static/chunks/webpack-92efb62b0535243f.js",
+      "static/chunks/webpack-b9b60fcf6ff84e6a.js",
       "static/chunks/fd9d1056-4dfc9e94511fc289.js",
       "static/chunks/69-9c624d2960d417fd.js",
       "static/chunks/main-app-c8478f266385bd60.js",
       "static/chunks/app/_not-found-55512f62fb47371d.js"
     ],
     "/layout": [
-      "static/chunks/webpack-92efb62b0535243f.js",
+      "static/chunks/webpack-b9b60fcf6ff84e6a.js",
       "static/chunks/fd9d1056-4dfc9e94511fc289.js",
       "static/chunks/69-9c624d2960d417fd.js",
       "static/chunks/main-app-c8478f266385bd60.js",
-      "static/css/4dc2809fdfcb494a.css",
-      "static/chunks/app/layout-01eb8f9040f78631.js"
+      "static/css/bec2cbf0e8826400.css",
+      "static/chunks/app/layout-48f1470e6ca60681.js"
     ],
     "/Login/page": [
-      "static/chunks/webpack-92efb62b0535243f.js",
+      "static/chunks/webpack-b9b60fcf6ff84e6a.js",
       "static/chunks/fd9d1056-4dfc9e94511fc289.js",
       "static/chunks/69-9c624d2960d417fd.js",
       "static/chunks/main-app-c8478f266385bd60.js",
@@ -24,24 +24,8 @@
       "static/chunks/703-e48499ab4c43ae9b.js",
       "static/chunks/app/Login/page-05fcf141eaec3199.js"
     ],
-    "/SignUp/page": [
-      "static/chunks/webpack-92efb62b0535243f.js",
-      "static/chunks/fd9d1056-4dfc9e94511fc289.js",
-      "static/chunks/69-9c624d2960d417fd.js",
-      "static/chunks/main-app-c8478f266385bd60.js",
-      "static/chunks/app/SignUp/page-490ab08c82adef0f.js"
-    ],
-    "/PlanMeal/page": [
-      "static/chunks/webpack-92efb62b0535243f.js",
-      "static/chunks/fd9d1056-4dfc9e94511fc289.js",
-      "static/chunks/69-9c624d2960d417fd.js",
-      "static/chunks/main-app-c8478f266385bd60.js",
-      "static/chunks/792-0e3a3497173a14f7.js",
-      "static/css/6f0381599ea8a67e.css",
-      "static/chunks/app/PlanMeal/page-0f07fe4c234992fe.js"
-    ],
     "/Recipes/page": [
-      "static/chunks/webpack-92efb62b0535243f.js",
+      "static/chunks/webpack-b9b60fcf6ff84e6a.js",
       "static/chunks/fd9d1056-4dfc9e94511fc289.js",
       "static/chunks/69-9c624d2960d417fd.js",
       "static/chunks/main-app-c8478f266385bd60.js",
@@ -49,16 +33,24 @@
       "static/chunks/703-e48499ab4c43ae9b.js",
       "static/chunks/app/Recipes/page-733dc81283df19c5.js"
     ],
-    "/page": [
-      "static/chunks/webpack-92efb62b0535243f.js",
+    "/PlanMeal/page": [
+      "static/chunks/webpack-b9b60fcf6ff84e6a.js",
       "static/chunks/fd9d1056-4dfc9e94511fc289.js",
       "static/chunks/69-9c624d2960d417fd.js",
       "static/chunks/main-app-c8478f266385bd60.js",
       "static/chunks/792-0e3a3497173a14f7.js",
-      "static/chunks/app/page-2ffbefa2d3a793b7.js"
+      "static/css/6f0381599ea8a67e.css",
+      "static/chunks/app/PlanMeal/page-0f07fe4c234992fe.js"
+    ],
+    "/SignUp/page": [
+      "static/chunks/webpack-b9b60fcf6ff84e6a.js",
+      "static/chunks/fd9d1056-4dfc9e94511fc289.js",
+      "static/chunks/69-9c624d2960d417fd.js",
+      "static/chunks/main-app-c8478f266385bd60.js",
+      "static/chunks/app/SignUp/page-490ab08c82adef0f.js"
     ],
     "/Recipes/[recipeId]/page": [
-      "static/chunks/webpack-92efb62b0535243f.js",
+      "static/chunks/webpack-b9b60fcf6ff84e6a.js",
       "static/chunks/fd9d1056-4dfc9e94511fc289.js",
       "static/chunks/69-9c624d2960d417fd.js",
       "static/chunks/main-app-c8478f266385bd60.js",
@@ -66,6 +58,14 @@
       "static/chunks/703-e48499ab4c43ae9b.js",
       "static/chunks/188-b74a406c2652d18b.js",
       "static/chunks/app/Recipes/[recipeId]/page-4634d3175d6d2e6a.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-b9b60fcf6ff84e6a.js",
+      "static/chunks/fd9d1056-4dfc9e94511fc289.js",
+      "static/chunks/69-9c624d2960d417fd.js",
+      "static/chunks/main-app-c8478f266385bd60.js",
+      "static/chunks/792-0e3a3497173a14f7.js",
+      "static/chunks/app/page-2ffbefa2d3a793b7.js"
     ]
   }
 }

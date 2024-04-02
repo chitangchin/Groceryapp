@@ -1,10 +1,1 @@
-{
-  "/_not-found": "app/_not-found.js",
-  "/Login/page": "app/Login/page.js",
-  "/Recipes/page": "app/Recipes/page.js",
-  "/PlanMeal/page": "app/PlanMeal/page.js",
-  "/SignUp/page": "app/SignUp/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/Recipes/[recipeId]/page": "app/Recipes/[recipeId]/page.js",
-  "/page": "app/page.js"
-}
+{}

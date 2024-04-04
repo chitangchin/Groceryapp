@@ -23,7 +23,7 @@ userRouter
                 res.cookie('token', token, {
                     httpOnly: true,
                 });
-                res.json(token);
+                res.end('Login Successful!');
             } catch {
                 res.statusCode = 404;
                 err_msg = `Unable to login`;

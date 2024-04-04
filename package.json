@@ -1,0 +1,16 @@
+{
+  "name": "groceryapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Client/src/app/page.jsx",
+  "scripts": {
+    "devInstall": "cd ./Client && npm install && cd ../ && cd ./Server && npm install",
+    "startClient": "cd ./Client && npm run dev",
+    "startServer": "cd ./Server && npm run start",
+    "dev": "concurrently \"npm run startClient\" \"npm run startServer\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd ./Client && npm run build"
+  },
+  "author": "",
+  "license": "ISC"
+}

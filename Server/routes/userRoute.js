@@ -1,7 +1,10 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
+
 const { pool } = require('../db_config');
 const userRouter = express.Router();
 const auth = require('../middleware/auth');
+const { hashPassword } = require('../utils/hashPassword');
 
 userRouter
     .route('/login')
@@ -11,23 +14,32 @@ userRouter
         next();
     })
     .post((req, res, next) => {
-        const userInfo = [req.body.username, req.body.password];
-
+        const {
+            username,
+            password,
+        } = req.body;
         pool.query(
-            'Select id FROM users WHERE username = $1 AND password = $2',
+            'Select id FROM users WHERE username = $1',
             userInfo
         ).then((result) => {
             try {
-                const userId = result.rows[0];
-                const token = auth.getToken(userId);
-                res.cookie('token', token, {
-                    httpOnly: true,
-                });
-                res.json(token);
-            } catch {
-                res.statusCode = 404;
-                err_msg = `Unable to login`;
-                return res.json(err_msg);
+            if(result.rowCount == 0) {
+                console.log(`User $(username) does not exist`);
+                return res.status(404).json(`User does not exist`);
+            }
+            const isPasswordValid = bcrypt.compareSync(password, result.rows[0].password);
+            if(!isPasswordValid){
+                return res.status(401).json('Invalid credentials');
+            }
+            const userId = result.rows[0];
+            const token = auth.getToken(userId);
+            res.cookie('token', token, {
+                httpOnly: true,
+            });
+            res.json(token);
+            } catch (err) {
+                console.error(err);
+                return res.status(404).json('Error logging in');
             }
         });
     });

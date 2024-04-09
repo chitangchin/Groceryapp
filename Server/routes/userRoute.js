@@ -68,7 +68,7 @@ userRouter
         const {username} = req.body;
         //TODO: check if password exists and valid
         const hashedPassword = hashPassword(req.body.password);
-        //TODO: check if username exists and send error back to client
+        //TODO: check if username already exists in db and send error back to client
         pool.query(
             'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id',
             [username, hashedPassword]

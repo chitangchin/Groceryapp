@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-
+const logger = require('pino')()
 const { pool } = require('../db_config');
 const userRouter = express.Router();
 const auth = require('../middleware/auth');
@@ -16,7 +16,7 @@ userRouter
     .post((req, res, next) => {
         const {
             username,
-            password,
+            password, 
         } = req.body;
         pool.query(
             'Select id FROM users WHERE username = $1',
@@ -36,10 +36,11 @@ userRouter
             res.cookie('token', token, {
                 httpOnly: true,
             });
-            res.json(token);
+            console.log('Successfully logged in with token: ' + token);
+            res.status(200).json('Successfully logged in');
             } catch (err) {
                 console.error(err);
-                return res.status(404).json('Error logging in');
+                return res.status(500).json('Error logging in');
             }
         });
     });

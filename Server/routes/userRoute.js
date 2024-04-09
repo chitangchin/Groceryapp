@@ -64,7 +64,9 @@ userRouter
         next();
     })
     .post((req, res, next) => {
+        //TODO: check if username exists and valid
         const {username} = req.body;
+        //TODO: check if password exists and valid
         const hashedPassword = hashPassword(req.body.password);
         //TODO: check if username exists and send error back to client
         pool.query(

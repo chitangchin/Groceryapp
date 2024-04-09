@@ -8,7 +8,7 @@ const logger = require('pino')()
  * @param {string} password - The password to be hashed.
  * @return {string} The hashed password.
  */
-export const hashPassword =  (password) => {
+const hashPassword =  (password) => {
     const saltRounds = 10; //TODO: get it from environment
     const salt =  bcrypt.genSaltSync(saltRounds);
     const hash =  bcrypt.hashSync(password, salt);
@@ -16,3 +16,5 @@ export const hashPassword =  (password) => {
 }
 
 logger.info("hashed password: " + hashPassword("checking"))
+
+module.exports = { hashPassword };

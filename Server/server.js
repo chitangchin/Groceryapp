@@ -10,11 +10,7 @@ app.use(express.json()); //Middleware to parse body for requests and responses
 app.use(cookieParser()); //Middleware to allow access to cookies
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
-pool.connect() //Connects DB to Express
+pool.connect()
     .then(() => console.log('Connected to DB'))
     .catch((err) => console.error('DB not connected', err));
 

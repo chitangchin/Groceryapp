@@ -59,7 +59,7 @@ userRouter
             userInfo
         ).then((result) => {
             try {
-                const userId = result.rows[0].id;
+                const userId = result.rows[0];
                 const token = auth.getToken(userId);
                 res.cookie('token', token, {
                     httpOnly: true,

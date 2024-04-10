@@ -1,5 +1,6 @@
 
 "use client";
+import Link from 'next/link'
 import { UserPassContext } from '../../Context/userContext.js';
 import { useState } from 'react';
 
@@ -45,9 +46,7 @@ const Login = () => {
             submit
           </button>
           {/* Sign Up Button */}
-          <button>
-            sign up
-          </button>
+          <Link href="/signUp">Sign Up</Link>
         </div>
         {/*End Sign Up and Login Div*/}
       </div>

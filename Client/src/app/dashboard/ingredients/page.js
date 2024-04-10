@@ -1,36 +1,71 @@
+"use client"
 import React from 'react'
+import { useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams, useRouter } from 'next/navigation'
 
 const Ingredients = () => {
+
+  const [newUser, setNewUser] = useState(false);
+  const [ingredientsAdded, setIngredientsAdded] = useState([])
+
+  const FirstTimeUserCheck = () => {
+    var firstUserText = "";
+    const searchParams = useSearchParams()
+    const newUserCheck = searchParams.get('newUser')
+    if (newUser) {
+      setNewUser(true);
+    }
+    return;
+  }
+
+  const IngredientsSearch = () => {
+    return (
+      <div>
+        {/* Add ingredients search bar functionality*/}
+      </div>
+    )
+  }
+
+  const IngredientsEntered = () => {
+    return (
+      <div>
+        {/* Create ingredients entered box */}
+        {/* Create edit button for ingriednients entered */}
+      </div>
+    )
+  }
+
+  // If user is new:
+  const IngredientsPostRequestDB = () => {
+// Add post request logic
+  }
+
+  // If user is not new:
+  const IngredientsPutRequestDB = () => {
+// Add put request logic
+  }
+
+  const IngredientsRequestDB = () => {
+    if(newUser){
+      IngredientsPostRequestDB();
+    } else {
+      IngredientsPutRequestDB();
+    }
+  }
+
+FirstTimeUserCheck();
+
   return (
     <div>
-      <div>
-        {/* userFirstTime = True: render this statement */}
-        <div>Lets get started by adding ingredients you already have!</div>
-        <div>
-          Search for ingredients search box
-        </div>
-        {/* Have drop down functionality */}
-      </div>
-      <div>
-        {/* Have list of ingredients entered */}
-        {/* userFirstTime = false: make get request to server and pull all ingredients user has first */}
-        Edit Button
-      </div>
-      <div>
-        <div>
-          {/* Future feature disregard for now - userFirstTime = True: 3 dots indicating the page stage 1/3  */}
-        </div>
-        <div>
-          post request to backend
-          {/* Submit button */}
-          <Link href="/dashboard">Submit</Link>
-        </div>
-        
-      </div>
-
-
-
+      {newUser ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
+      <IngredientsSearch />
+      <IngredientsEntered />
+      <button onClick={IngredientsRequestDB}>
+        post request to backend
+        {/* Submit button */}
+        <Link href="/dashboard">Submit</Link>
+      </button>
     </div>
   )
 }

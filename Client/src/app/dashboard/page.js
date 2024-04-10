@@ -1,4 +1,9 @@
 import React from 'react'
+import recipeCards from '@/Components/recipeCards'
+
+// recipeCards:
+// <recipeCards img={img} title={title} ingredients={ingredients}, cookingTime={cookingTime}/>
+// img, title, ingredients, cookingTime
 
 const Dashboard = () => {
   return (

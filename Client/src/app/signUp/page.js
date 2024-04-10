@@ -16,13 +16,13 @@ const SignUp = () => {
     //Enter Logic to check if user exists in database
     //Enter Logic to check if password is valid
     //Enter Logic to add user to db
-      router.push(`/dashboard/ingredients?userid=${username}`)
+      router.push(`/dashboard/ingredients?userid=${username}&newUser=true`)
       return;
   }
 
   return (
-    <div class="h-screen grid justify-items-center content-center ">
-        <div class="grid justify-items-center content-center border-2 border-rose-500">
+    <div className="h-screen grid justify-items-center content-center ">
+        <div className="grid justify-items-center content-center border-2 border-rose-500">
           <input
             class="text-center border-2 border-black"
             type="text"
@@ -31,7 +31,7 @@ const SignUp = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            class="text-center border-2 border-black"
+            className="text-center border-2 border-black"
             type="text"
             placeholder="Password"
             value={password}

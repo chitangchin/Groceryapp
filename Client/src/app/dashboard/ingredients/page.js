@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation'
 
@@ -16,7 +16,9 @@ const Ingredients = () => {
     if (newUser) {
       setNewUser(true);
     }
-    return;
+    return (<div>
+      {newUser ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
+    </div>);
   }
 
   const IngredientsSearch = () => {
@@ -54,11 +56,12 @@ const Ingredients = () => {
     }
   }
 
-FirstTimeUserCheck();
-
   return (
     <div>
-      {newUser ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
+      <Suspense>
+        <FirstTimeUserCheck/>
+      </Suspense>
+      
       <IngredientsSearch />
       <IngredientsEntered />
       <button onClick={IngredientsRequestDB}>

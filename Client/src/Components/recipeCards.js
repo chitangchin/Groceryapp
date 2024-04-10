@@ -7,7 +7,7 @@ const recipeCards = (img, title, ingredients, cookingTime) => {
     // Estimated cooking time
   return (
     <div>
-    <img></img>
+    <img alt="recipeImage"></img>
    <h1></h1>
    <p></p>
    <h3></h3> 

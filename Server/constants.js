@@ -12,6 +12,7 @@
  const TEXT_PLAIN = 'text/plain'
 
 //Status codes
+const OK = 200
  const BAD_REQUEST = 400
  const UNAUTHORIZED = 401
  const NOT_FOUND = 404
@@ -36,6 +37,7 @@
 
 
 module.exports = {
+    OK,
     TEXT_PLAIN,
     CONTENT_TYPE,
     SUCCESSFULLY_LOGGED_IN,

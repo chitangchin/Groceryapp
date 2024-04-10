@@ -15,7 +15,7 @@ pool.connect()
     .catch((err) => console.error('DB not connected', err));
 
 const ownedRouter = require('./routes/ownedRouter'); //Imports ownedRouter
-const userRouter = require('./routes/userRoute');
+const userRouter = require('./routes/user.route.js');
 
 app.use('/owned', ownedRouter); //Server refers to ownedRouter for all api calls to /owned
 app.use('/user', userRouter);

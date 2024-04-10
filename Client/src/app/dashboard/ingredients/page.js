@@ -24,7 +24,7 @@ const Ingredients = () => {
         <div>
           post request to backend
           {/* Submit button */}
-          <Link href="/dashboard">dashboard</Link>
+          <Link href="/dashboard">Submit</Link>
         </div>
         
       </div>

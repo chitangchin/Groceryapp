@@ -4,6 +4,7 @@ const { pool } = require('../db_config');
 const userRouter = express.Router();
 const auth = require('../middleware/auth');
 const { hashPassword } = require('../utils/hashPassword');
+const { USERNAME_REGEX, BAD_REQUEST, BAD_PASSWORD, BAD_USERNAME, FIND_ALL_USERS_BY_USERNAME, USERNAME_ALREADY_EXISTS, PASSWORD_REGEX, INSERT_INTO_USERS_USERNAME_AND_PASSWORD, CONFLICT, INTERNAL_SERVER_ERROR, UNEXPECTED_ERROR, REGISTRATION_SUCCESSFUL, TOKEN, USER_DOESNT_EXIST, NOT_FOUND, UNAUTHORIZED, INVALID_CREDENTIALS, NUMBER, ERROR_LOGGING_IN, CONTENT_TYPE, TEXT_PLAIN, SUCCESSFULLY_LOGGED_IN } = require('../constants');
 
 /**
  * Handle POST request to login endpoint
@@ -13,7 +14,7 @@ const { hashPassword } = require('../utils/hashPassword');
 userRouter
     .route('/login')
     .all((req, res, next) => {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader(CONTENT_TYPE, TEXT_PLAIN);
         next();
     })
     .post((req, res, next) => {
@@ -22,30 +23,30 @@ userRouter
             password, 
         } = req.body;
         pool.query(
-            'Select * FROM users WHERE username = $1',
+            FIND_ALL_USERS_BY_USERNAME,
             [username]
         ).then((result) => {
             try {
             if(result.rowCount == 0) {
-                return res.status(404).json(`User does not exist`);
+                return res.status(NOT_FOUND).json(USER_DOESNT_EXIST);
             }
             const isPasswordValid = bcrypt.compareSync(password, result.rows[0].password);
             if(!isPasswordValid){
-                return res.status(401).json('Invalid credentials');
+                return res.status(UNAUTHORIZED).json(INVALID_CREDENTIALS);
             }
-            //TODO: do we really need to check if password is a number && exist??
-            if(!result.rows[0].id || typeof +result.rows[0].id !== 'number') {
-                return res.status(500).json('Error logging in');
+            //! Do we have to keep below validation that I have made or it can be removed?
+            if(!result.rows[0].id || typeof +result.rows[0].id !== NUMBER) {
+                return res.status(INTERNAL_SERVER_ERROR).json(ERROR_LOGGING_IN);
             } 
             const userId = result.rows[0].id;
             const token = auth.getToken(userId);
-            res.cookie('token', token, {
+            res.cookie(TOKEN, token, {
                 httpOnly: true,
             });
-            res.status(200).json('Successfully logged in');
+            res.json(SUCCESSFULLY_LOGGED_IN);
             } catch (err) {
                 console.error(err);
-                return res.status(500).json('Error logging in');
+                return res.status(INTERNAL_SERVER_ERROR).json(ERROR_LOGGING_IN);
             }
         });
     });
@@ -63,27 +64,39 @@ userRouter
         res.setHeader('Content-Type', 'text/plain');
         next();
     })
-    .post((req, res, next) => {
-        //TODO: check if username exists and valid
+    .post(async (req, res, next) => {
         const {username} = req.body;
-        //TODO: check if password exists and valid
+        const isValidUsername = USERNAME_REGEX;
+        if (!isValidUsername.test(username)) {
+            return res.status(BAD_REQUEST).json(BAD_USERNAME);
+        }
+        const isValidPassword = PASSWORD_REGEX;
+        if (!isValidPassword.test(req.body.password)) {
+            return res.status(BAD_REQUEST).json(BAD_PASSWORD);
+        }
         const hashedPassword = hashPassword(req.body.password);
-        //TODO: check if username already exists in db and send error back to client
+        const result = await pool.query(
+            FIND_ALL_USERS_BY_USERNAME,
+            [username]
+        )
+        if(result.rowCount > 0) {
+            return res.status(CONFLICT).json(USERNAME_ALREADY_EXISTS);
+        }    
         pool.query(
-            'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id',
+            INSERT_INTO_USERS_USERNAME_AND_PASSWORD,
             [username, hashedPassword]
         ).then((result) => {
             try {
                 const userId = result.rows[0].id;
                 const token = auth.getToken(userId);
-                res.cookie('token', token, {
+                res.cookie(TOKEN, token, {
                     httpOnly: true,
                 });
-                res.end('Registration Successful!');
+                res.end(REGISTRATION_SUCCESSFUL);
             } catch (err) {
                 console.error('Error during registration:', err);
-                res.statusCode = 500;
-                res.end('Internal Server Error');
+                res.statusCode = INTERNAL_SERVER_ERROR;
+                res.end(UNEXPECTED_ERROR);
             }
         });
     });

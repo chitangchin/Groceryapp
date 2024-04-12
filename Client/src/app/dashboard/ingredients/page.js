@@ -1,11 +1,12 @@
 "use client"
-import React from 'react'
-import { useState, Suspense } from 'react';
+import { useState, Suspense, useContext } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation'
+import IngredientsContext from '@/app/Context/ingredientsContext';
 
 const Ingredients = () => {
 
+  const [ ingredients, setIngredients] = useContext(IngredientsContext)
   const [newUser, setNewUser] = useState(false);
   const [ingredientsAdded, setIngredientsAdded] = useState([])
 
@@ -38,15 +39,18 @@ const Ingredients = () => {
     )
   }
 
-  // If user is new:
+  // To add ingredients
   const IngredientsPostRequestDB = () => {
 // Add post request logic
   }
 
-  // If user is not new:
-  const IngredientsPutRequestDB = () => {
-// Add put request logic
-  }
+
+  // Editing Ingredients
+//   const IngredientsPutRequestDB = () => {
+// // Add put request logic update
+//   }
+
+// when existing user submits store recipes in local storage
 
   const IngredientsRequestDB = () => {
     if(newUser){

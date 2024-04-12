@@ -1,13 +1,13 @@
 
 "use client";
 import Link from 'next/link'
-import { UserPassContext } from '../../Context/userContext.js';
-import { useState } from 'react';
+import UsernameContext from '../Context/userContext';
+import { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation'
 
 const Login = () => {
   const router = useRouter();
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useContext(UsernameContext);
   const [password, setPassword] = useState('');
   const [isLoggedIn, setisLoggedIn] = useState(false);
   console.log(username);
@@ -18,7 +18,7 @@ const Login = () => {
     //Enter Logic to check if user exists in database
     if (true) {
       setisLoggedIn(true);
-      router.push(`/dashboard?userid=${username}`)
+      router.push(`/dashboard`)
       return;
     } else {
       //Return error message that user not found
@@ -26,17 +26,17 @@ const Login = () => {
   }
 
   return (
-    <div class="h-screen grid justify-items-center content-center ">
-        <div class="grid justify-items-center content-center border-2 border-rose-500">
+    <div className="h-screen grid justify-items-center content-center ">
+        <div className="grid justify-items-center content-center border-2 border-rose-500">
           <input
-            class="text-center border-2 border-black"
+            className="text-center border-2 border-black"
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            class="text-center border-2 border-black"
+            className="text-center border-2 border-black"
             type="text"
             placeholder="Password"
             value={password}

@@ -24,7 +24,7 @@ const SignUp = () => {
     <div className="h-screen grid justify-items-center content-center ">
         <div className="grid justify-items-center content-center border-2 border-rose-500">
           <input
-            class="text-center border-2 border-black"
+            className="text-center border-2 border-black"
             type="text"
             placeholder="Username"
             value={username}

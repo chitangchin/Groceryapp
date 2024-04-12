@@ -14,7 +14,4 @@ const hashPassword =  (password) => {
     const hash =  bcrypt.hashSync(password, salt);
     return hash;
 }
-
-logger.info("hashed password: " + hashPassword("checking"))
-
 module.exports = { hashPassword };

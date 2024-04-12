@@ -1,9 +1,14 @@
 "use client";
 import { useContext } from 'react';
-import RecipesContext from '../Context/recipeContextProvider.js'
 import Link from 'next/link'
-import recipeCards from '@/app/Components/recipeCards.js';
 
+// Context
+import RecipesContext from '../Context/recipeContextProvider.js'
+import UsernameContext from '../Context/userContext.js';
+import LoggedInContext from '../Context/loggedInContext.js';
+
+// Components
+import recipeCards from '@/app/Components/recipeCards.js';
 
 
 // Store array of recipe ids
@@ -16,19 +21,17 @@ import recipeCards from '@/app/Components/recipeCards.js';
 
 const Dashboard = () => {
 
-const [ recipes, setRecipes ] = useContext(RecipesContext);
+  // State
+  const [recipes, setRecipes] = useContext(RecipesContext);
+  const [username, setUsername] = useContext(UsernameContext);
+  const [loggedIn, setLoggedIn] = useContext(LoggedInContext);
 
-console.log(recipes)
-
-  // setRecipes([123])
 
   const onClick = () => {
     setRecipes([1233])
   }
 
   // if refresh
-
-  console.log(recipes);
   return (
     <div>Dashboard
       <button onClick={onClick}>

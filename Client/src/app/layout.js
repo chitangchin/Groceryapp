@@ -3,6 +3,7 @@ import "./globals.css";
 import { RecipesProvider } from "./Context/recipeContextProvider";
 import { IngredientsProvider } from "./Context/ingredientsContext";
 import { UsernameProvider } from "./Context/userContext"
+import { LoggedInProvider } from "./Context/loggedInContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
  return (
     <html lang="en">
       <body>
+        <LoggedInProvider>
         <UsernameProvider>
         <IngredientsProvider>
         <RecipesProvider>
@@ -22,6 +24,7 @@ export default function RootLayout({ children }) {
           </RecipesProvider>
         </IngredientsProvider>
         </UsernameProvider>
+        </LoggedInProvider>
           </body>
     </html>
   )

@@ -1,24 +1,33 @@
 
 "use client";
-import Link from 'next/link'
-import UsernameContext from '../Context/userContext';
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+
+import UsernameContext from '../Context/userContext';
+import LoggedInContext from '../Context/loggedInContext';
 
 const Login = () => {
+  //Routing to Dashboard Onclick with additional Functionality
   const router = useRouter();
-  const [username, setUsername] = useContext(UsernameContext);
-  const [password, setPassword] = useState('');
-  const [isLoggedIn, setisLoggedIn] = useState(false);
-  console.log(username);
-  console.log(password);
 
-//Checking if User Exists;
+  // State
+  const [username, setUsername] = useContext(UsernameContext);
+  const [loggedIn, setLoggedIn] = useContext(LoggedInContext);
+  const inputUsername = useRef(null);
+  const inputPassword = useRef(null);
+
+  //Checking if User Exists;
   const userCheck = () => {
+    /* 
+     * Username: inputUsername.current.value
+     * Password: inputPassword.current.value
+    */
     //Enter Logic to check if user exists in database
     if (true) {
-      setisLoggedIn(true);
-      router.push(`/dashboard`)
+      setUsername(inputUsername.current.value);
+      setLoggedIn(true);
+      router.push(`/dashboard`);
       return;
     } else {
       //Return error message that user not found
@@ -27,29 +36,29 @@ const Login = () => {
 
   return (
     <div className="h-screen grid justify-items-center content-center ">
-        <div className="grid justify-items-center content-center border-2 border-rose-500">
-          <input
-            className="text-center border-2 border-black"
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            className="text-center border-2 border-black"
-            type="text"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-         </div>
-        <div className="space-x-4 m-2">
-        <a className="border-2 border-black" onClick={userCheck}>
-          Login
-        </a>
-        <Link className="border-2 border-black" href="/signUp">Sign Up</Link>
-        </div>
+      <div className="grid justify-items-center content-center border-2 border-rose-500">
+        <input
+          className="text-center border-2 border-black"
+          type="text"
+          placeholder="Username"
+          ref={inputUsername}
+        />
+        <input
+          className="text-center border-2 border-black"
+          type="text"
+          placeholder="Password"
+          ref={inputPassword}
+        />
       </div>
+      <div className="space-x-4 m-2">
+        <button className="border-2 border-black" onClick={userCheck}>
+          Login
+        </button>
+        <Link className="border-2 border-black" href="/signUp">
+          Sign Up
+          </Link>
+      </div>
+    </div>
   )
 }
 

@@ -12,7 +12,6 @@ const [recipes, setRecipes] = useContext(RecipesContext);
 
 const onClick = () => {
 
-  console.log(recipes)
 }
 
 // if refresh reset state to local storage

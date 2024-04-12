@@ -2,7 +2,6 @@ const express = require('express');
 const { pool } = require('./db_config');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const swagger = require('./swagger.js')
 
 const app = express();
 const port = 8080;
@@ -20,7 +19,6 @@ const userRouter = require('./routes/user.route.js');
 
 app.use('/owned', ownedRouter); //Server refers to ownedRouter for all api calls to /owned
 app.use('/user', userRouter);
-swagger(app)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -6,12 +6,17 @@ import Link from 'next/link'
 import RecipesContext from '../Context/recipeContextProvider.js'
 import UsernameContext from '../Context/userContext.js';
 import LoggedInContext from '../Context/loggedInContext.js';
+import IngredientsContext from '../Context/ingredientsContext.js';
 
 // Components
-import recipeCards from '@/app/Components/recipeCards.js';
+import RecipeCards from '@/app/Components/recipeCards.js';
 
+// Test
+import { testRecipe } from '../dummyData.js';
 
 // Store array of recipe ids
+
+// Display user added recipes on dashboard
 
 // recipeCards:
 // <recipeCards img={img} title={title} ingredients={ingredients}, cookingTime={cookingTime}/>
@@ -23,18 +28,39 @@ const Dashboard = () => {
 
   // State
   const [recipes, setRecipes] = useContext(RecipesContext);
-  const [username, setUsername] = useContext(UsernameContext);
+  const [username] = useContext(UsernameContext);
   const [loggedIn, setLoggedIn] = useContext(LoggedInContext);
+  const [ingredients] = useContext(IngredientsContext);
+
+//convert arr of ingredients to a string of ingredients user owns
 
 
-  const onClick = () => {
-    setRecipes([1233])
-  }
+//This logic below needs to be created as a server route
+const getRecipesAvailable = () => {
+  fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=5`, {
+    method: 'GET',
+    headers: {
+      'X-API-Key': process.env.NEXT_PUBLIC_SPOONAPIKEY,
+    }
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+
+    // Store recipes in local storage and in recipes state
+}
+
+  // Loop through api call for recipes
+  // Create Recipe Cards for each recipe
+  // Show user collected recipes
 
   // if refresh
   return (
     <div>Dashboard
-      <button onClick={onClick}>
+      <RecipeCards data={testRecipe} />
+      <RecipeCards data={testRecipe} />
+      <RecipeCards data={testRecipe} />
+      <button onClick={getRecipesAvailable}>
         submit
       </button>
       <Link href="/dashboard/recipes">recipes</Link>

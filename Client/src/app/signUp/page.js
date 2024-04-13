@@ -8,15 +8,13 @@ const SignUp = () => {
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  console.log(username);
-  console.log(password);
 
   //Checking if Username exists already, Checking if password is good, then adding user to database;
   const addUser = () => {
     //Enter Logic to check if user exists in database
     //Enter Logic to check if password is valid
     //Enter Logic to add user to db
-      router.push(`/dashboard/ingredients?userid=${username}&newUser=true`)
+      router.push(`/dashboard/ingredients?&newUser=true`)
       return;
   }
 

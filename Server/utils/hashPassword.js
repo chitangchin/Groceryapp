@@ -9,7 +9,7 @@ const logger = require('pino')()
  * @return {string} The hashed password.
  */
 const hashPassword =  (password) => {
-    const saltRounds = 10; //TODO: get it from environment
+    const saltRounds = process.env.SALT_ROUNDS; 
     const salt =  bcrypt.genSaltSync(saltRounds);
     const hash =  bcrypt.hashSync(password, salt);
     return hash;

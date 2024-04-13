@@ -30,6 +30,8 @@ const OK = 200
  const ERROR_LOGGING_IN = 'Error logging in'
  const SUCCESSFULLY_LOGGED_IN ='Successfully logged in'
  const ERROR_DURING_REGISTRATION = 'Error during registration'
+ const MISSING_INGREDIENTS = 'Missing ingredients in request'
+ const FAILED_TO_RETRIEVE_RECIPES ='Failed to retrieve recipes' 
 
 //Queries
  const FIND_ALL_USERS_BY_USERNAME = 'SELECT * FROM users WHERE username = $1'
@@ -37,6 +39,7 @@ const OK = 200
 
 
 module.exports = {
+  MISSING_INGREDIENTS,
     ERROR_DURING_REGISTRATION,
     OK,
     TEXT_PLAIN,

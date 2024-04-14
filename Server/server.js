@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 const app = express();
-const port = 8080;
+const port = process.env.SERVER_PORT;
 
 app.use(express.json()); //Middleware to parse body for requests and responses
 app.use(cookieParser()); //Middleware to allow access to cookies

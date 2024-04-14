@@ -1,15 +1,19 @@
 "use client"
-import { useState, useRef, useContext, Suspense } from 'react';
+import { useState, useEffect, useRef, useContext, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation'
 
 //Context
 import IngredientsContext from '@/app/Context/ingredientsContext';
+
+//Components
+import IngredientsBox from '@/app/Components/ingredientsBox'; //WORK IN PROGRESS
 
 const Ingredients = () => {
 
   // State
   const [ingredients, setIngredients] = useContext(IngredientsContext);
   const [edit, setEdit] = useState(false);
+  const [newUser, setNewUser] = useState(false);
   const inputIngredient = useRef(null);
 
   // Variables
@@ -21,9 +25,12 @@ const Ingredients = () => {
   const NewUserCheckFunction = () => {
     const searchParams = useSearchParams();
     let newUserCheck = searchParams.get('newUser');
+    if (newUserCheck === "true") {
+      useEffect(() => {setNewUser(true)},[]);
+    }
     return (
       <div>
-        {newUserCheck ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
+        {newUser ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
       </div>
     )
   }
@@ -47,7 +54,7 @@ const Ingredients = () => {
 
   // - Database Requests
   const IngredientsRequestDB = () => {
-    if (newUserCheck === "true") {
+    if (newUser) {
       IngredientsPostRequestDB();
     } else {
       IngredientsPutRequestDB();
@@ -93,10 +100,10 @@ const Ingredients = () => {
   }
 
   return (
-    
+
     <div>
       <Suspense>
-      <NewUserCheckFunction/>
+        <NewUserCheckFunction />
       </Suspense>
       <IngredientsSearch />
       <IngredientsBox />
@@ -106,7 +113,7 @@ const Ingredients = () => {
       <button onClick={IngredientsRequestDB}>
         Next
       </button>
-    </div> 
+    </div>
   )
 }
 

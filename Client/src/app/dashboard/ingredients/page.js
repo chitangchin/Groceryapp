@@ -1,5 +1,5 @@
 "use client"
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useRef, useContext, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation'
 
 //Context
@@ -14,12 +14,20 @@ const Ingredients = () => {
 
   // Variables
   const router = useRouter();
-  const searchParams = useSearchParams()
-  let newUserCheck = searchParams.get('newUser');
 
   // Functions
 
   // - Helper functions
+  const NewUserCheckFunction = () => {
+    const searchParams = useSearchParams()
+    let newUserCheck = searchParams.get('newUser');
+    return (
+      <div>
+        {newUserCheck ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
+      </div>
+    )
+  }
+
   const addIngredients = () => {
     let ingredientEntered = inputIngredient.current.value;
     //*Change the condition here to check if it exists as a valid ingredient
@@ -96,8 +104,11 @@ const Ingredients = () => {
   }
 
   return (
+    
     <div>
-      {newUserCheck ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
+      <Suspense>
+      <NewUserCheckFunction/>
+      </Suspense>
       <IngredientsSearch />
       <IngredientsBox />
       {edit ?
@@ -111,6 +122,7 @@ const Ingredients = () => {
         Next
       </button>
     </div>
+    
   )
 }
 

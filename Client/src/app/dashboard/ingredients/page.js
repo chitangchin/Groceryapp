@@ -1,77 +1,114 @@
 "use client"
-import { useState, Suspense, useContext } from 'react';
-import Link from 'next/link';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation'
+
+//Context
 import IngredientsContext from '@/app/Context/ingredientsContext';
 
 const Ingredients = () => {
 
-  const [ ingredients, setIngredients] = useContext(IngredientsContext)
-  const [newUser, setNewUser] = useState(false);
-  const [ingredientsAdded, setIngredientsAdded] = useState([])
+  // State
+  const [ingredients, setIngredients] = useContext(IngredientsContext)
+  const [edit, setEdit] = useState(false);
+  const inputIngredient = useRef(null);
 
-  const FirstTimeUserCheck = () => {
-    var firstUserText = "";
-    const searchParams = useSearchParams()
-    const newUserCheck = searchParams.get('newUser')
-    if (newUser) {
-      setNewUser(true);
+  // Variables
+  const router = useRouter();
+  const searchParams = useSearchParams()
+  let newUserCheck = searchParams.get('newUser');
+
+  // Functions
+
+  // - Helper functions
+  const addIngredients = () => {
+    let ingredientEntered = inputIngredient.current.value;
+    //*Change the condition here to check if it exists as a valid ingredient
+    if (ingredientEntered.length > 0) {
+      setIngredients(existingValues => [...existingValues, ingredientEntered]);
     }
-    return (<div>
-      {newUser ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
-    </div>);
   }
 
-  const IngredientsSearch = () => {
-    return (
-      <div>
-        {/* Add ingredients search bar functionality*/}
-      </div>
-    )
+  const editIngredients = (itemString) => {
+    const currArr = ingredients;
+    var index = currArr.indexOf(itemString);
+    if (index !== -1) {
+      currArr.splice(index, 1);
+      console.log(currArr)
+      setIngredients(currArr);
+    }
   }
 
-  const IngredientsEntered = () => {
-    return (
-      <div>
-        {/* Create ingredients entered box */}
-        {/* Create edit button for ingriednients entered */}
-      </div>
-    )
-  }
-
+  // - Database Requests
   // To add ingredients
   const IngredientsPostRequestDB = () => {
-// Add post request logic
+    // Add post request logic
+    router.push(`/dashboard`);
   }
 
-
   // Editing Ingredients
-//   const IngredientsPutRequestDB = () => {
-// // Add put request logic update
-//   }
-
-// when existing user submits store recipes in local storage
-
+  //   const IngredientsPutRequestDB = () => {
+  // // Add put request logic update
+  //   }
   const IngredientsRequestDB = () => {
-    if(newUser){
+    if (newUserCheck === "true") {
       IngredientsPostRequestDB();
     } else {
       IngredientsPutRequestDB();
     }
   }
 
+  // - Displayed Components
+  const IngredientsSearch = () => {
+    return (<div>
+      <input
+        className="text-center border-2 border-black"
+        type="text"
+        placeholder="Enter ingredients you have"
+        ref={inputIngredient}
+      />
+      <button onClick={addIngredients}>
+        click here
+      </button>
+    </div>);
+  }
+
+  const IngredientsBox = () => {
+    return ingredients.map((ingredient) =>
+      <li key={ingredient}>
+        {ingredient}
+        {edit ? <button onClick={() => editIngredients(ingredient)} >edit</button> : <></>}
+      </li>);
+  }
+
+  const EditIngredientsButton = () => {
+    setEdit(true);
+    return;
+  }
+
+  const SaveIngredientsButton = () => {
+    setEdit(false);
+    return;
+  }
+
+  //Testing
+  const checkIngredientsState = () => {
+    console.log(ingredients);
+  }
+
   return (
     <div>
-      <Suspense>
-        <FirstTimeUserCheck/>
-      </Suspense>
-      
+      {newUserCheck ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
       <IngredientsSearch />
-      <IngredientsEntered />
+      <IngredientsBox />
+      {edit ?
+        <button onClick={SaveIngredientsButton}>Save</button> :
+        <button onClick={EditIngredientsButton}>Edit</button>}
+      {/* Test */}
+      <button onClick={checkIngredientsState}>
+        Check Ingredients State
+      </button>
       <button onClick={IngredientsRequestDB}>
-        post request to backend
-        {/* Submit button */}
-        <Link href="/dashboard">Submit</Link>
+        Next
       </button>
     </div>
   )

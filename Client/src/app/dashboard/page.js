@@ -44,11 +44,14 @@ const getRecipesAvailable = () => {
     }
   })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => data.map((recipe) => setRecipes(existingValue => [...existingValue, recipe])))
     .catch(err => console.error(err));
 
     // Store recipes in local storage and in recipes state
+    
 }
+
+console.log("This is recipes",recipes);
 
   // Loop through api call for recipes
   // Create Recipe Cards for each recipe
@@ -64,6 +67,7 @@ const getRecipesAvailable = () => {
         submit
       </button>
       <Link href="/dashboard/recipes">recipes</Link>
+      <Link href="/dashboard/ingredients">ingredients</Link>
     </div>
   )
 }

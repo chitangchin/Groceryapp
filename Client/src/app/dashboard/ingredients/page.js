@@ -8,7 +8,7 @@ import IngredientsContext from '@/app/Context/ingredientsContext';
 const Ingredients = () => {
 
   // State
-  const [ingredients, setIngredients] = useContext(IngredientsContext)
+  const [ingredients, setIngredients] = useContext(IngredientsContext);
   const [edit, setEdit] = useState(false);
   const inputIngredient = useRef(null);
 
@@ -19,7 +19,7 @@ const Ingredients = () => {
 
   // - Helper functions
   const NewUserCheckFunction = () => {
-    const searchParams = useSearchParams()
+    const searchParams = useSearchParams();
     let newUserCheck = searchParams.get('newUser');
     return (
       <div>
@@ -41,7 +41,6 @@ const Ingredients = () => {
     var index = currArr.indexOf(itemString);
     if (index !== -1) {
       currArr.splice(index, 1);
-      console.log(currArr)
       setIngredients(currArr);
     }
   }

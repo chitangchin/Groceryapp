@@ -1,6 +1,5 @@
 "use client"
 import React from 'react';
-import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
 
@@ -30,7 +29,8 @@ const SignUp = () => {
           />
           <input
             className="text-center border-2 border-black"
-            type="text"
+            type="password"
+            minlength="8"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

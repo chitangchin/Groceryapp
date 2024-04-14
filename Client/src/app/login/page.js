@@ -45,7 +45,8 @@ const Login = () => {
         />
         <input
           className="text-center border-2 border-black"
-          type="text"
+          type="password"
+          minlength="8"
           placeholder="Password"
           ref={inputPassword}
         />

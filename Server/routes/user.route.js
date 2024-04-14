@@ -10,5 +10,4 @@ userRouter
     .route('/register')
     .post(UserController.register);
 
-    //test route
 module.exports = userRouter;

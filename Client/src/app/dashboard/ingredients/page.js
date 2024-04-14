@@ -47,22 +47,17 @@ const Ingredients = () => {
   }
 
   // - Database Requests
-  // To add ingredients
-  const IngredientsPostRequestDB = () => {
-    // Add post request logic
-    router.push(`/dashboard`);
-  }
-
-  // Editing Ingredients
-  //   const IngredientsPutRequestDB = () => {
-  // // Add put request logic update
-  //   }
   const IngredientsRequestDB = () => {
     if (newUserCheck === "true") {
       IngredientsPostRequestDB();
     } else {
       IngredientsPutRequestDB();
     }
+  }
+
+  const IngredientsPostRequestDB = () => {
+    //*Add post request logic
+    router.push(`/dashboard`);
   }
 
   // - Displayed Components
@@ -98,11 +93,6 @@ const Ingredients = () => {
     return;
   }
 
-  //Testing
-  const checkIngredientsState = () => {
-    console.log(ingredients);
-  }
-
   return (
     
     <div>
@@ -114,15 +104,10 @@ const Ingredients = () => {
       {edit ?
         <button onClick={SaveIngredientsButton}>Save</button> :
         <button onClick={EditIngredientsButton}>Edit</button>}
-      {/* Test */}
-      <button onClick={checkIngredientsState}>
-        Check Ingredients State
-      </button>
       <button onClick={IngredientsRequestDB}>
         Next
       </button>
-    </div>
-    
+    </div> 
   )
 }
 

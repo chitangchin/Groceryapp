@@ -30,7 +30,6 @@ const SignUp = () => {
           <input
             className="text-center border-2 border-black"
             type="password"
-            minlength="8"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

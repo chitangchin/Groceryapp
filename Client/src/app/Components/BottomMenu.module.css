@@ -1,0 +1,19 @@
+.menu {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  transition: bottom 0.3s ease;
+}
+
+.open {
+  bottom: 0;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}

@@ -6,10 +6,19 @@ const auth = require('../middleware/auth');
 
 ownedRouter
     .route('/:userId')
-    .all((req, res, next) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/plain');
-        next();
+    .all(auth.verifyUser, (req, res, next) => {
+        try {
+            if (req.params.userId !== req.user.id) {
+                throw 'error';
+            }
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'text/plain');
+            next();
+        } catch (exception) {
+            res.statusCode = 400;
+            res.setHeader('Content-Type', 'text/plain');
+            res.end('No access');
+        }
     })
     .get((req, res, next) => {
         pool.query(
@@ -61,10 +70,19 @@ ownedRouter
 
 ownedRouter
     .route('/:userId/:ingredientId')
-    .all((req, res, next) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/plain');
-        next();
+    .all(auth.verifyUser, (req, res, next) => {
+        try {
+            if (req.params.userId !== req.user.id) {
+                throw 'error';
+            }
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'text/plain');
+            next();
+        } catch (exception) {
+            res.statusCode = 400;
+            res.setHeader('Content-Type', 'text/plain');
+            res.end('No access');
+        }
     })
     .get((req, res, next) => {
         pool.query(

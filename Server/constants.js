@@ -39,12 +39,16 @@ const INVALID_INGREDIENTS =
     'Invalid ingredients provided. Must be an array of strings with length between 2 and 20 characters long';
 const FAILED_TO_RETRIEVE_INGREDIENTS = 'Failed to retrieve ingredients';
 const ALL_INGREDIENTS_RETURNED = 'All ingredients returned';
+const NO_INGREDIENTS_OWNED = 'User has no ingredients';
+const USER_INGREDIENTS_RETURNED = 'All user ingredients returned';
 
 //Queries
 const FIND_ALL_USERS_BY_USERNAME = 'SELECT * FROM users WHERE username = $1';
 const INSERT_INTO_USERS_USERNAME_AND_PASSWORD =
     'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id';
 const FIND_ALL_INGREDIENTS = 'SELECT * FROM ingredients';
+const FIND_INGREDIENT_ID_BY_USER =
+    'SELECT ingredient_id FROM ingredients_owned WHERE user_id = $1;';
 
 module.exports = {
     INVALID_INGREDIENTS,
@@ -77,4 +81,7 @@ module.exports = {
     FIND_ALL_INGREDIENTS,
     FAILED_TO_RETRIEVE_INGREDIENTS,
     ALL_INGREDIENTS_RETURNED,
+    NO_INGREDIENTS_OWNED,
+    USER_INGREDIENTS_RETURNED,
+    FIND_INGREDIENT_ID_BY_USER,
 };

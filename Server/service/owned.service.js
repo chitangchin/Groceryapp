@@ -1,10 +1,10 @@
 const { bool } = require('joi');
 const {
-    FIND_ALL_INGREDIENTS,
+    NO_INGREDIENTS_OWNED,
     NOT_FOUND,
     OK,
-    FAILED_TO_RETRIEVE_INGREDIENTS,
-    ALL_INGREDIENTS_RETURNED,
+    USER_INGREDIENTS_RETURNED,
+    FIND_INGREDIENT_ID_BY_USER,
 } = require('../constants');
 
 class OwnedService {
@@ -14,25 +14,35 @@ class OwnedService {
     }
 
     async fetchAllUserIngredients() {
-        const results = await this.pool.query(
-            'SELECT ingredient_id FROM ingredients_owned WHERE user_id = $1;',
-            [this.req.params.userId]
-        );
+        const results = await this.findIngredientsByUserId();
         const userIngredients = results.rows;
         const rowCount = results.rowCount;
 
         if (!rowCount) {
             return {
                 status: NOT_FOUND,
-                message: 'User has no ingredients',
+                message: NO_INGREDIENTS_OWNED,
             };
         }
 
         return {
             status: OK,
-            message: 'All user ingredients returned',
+            message: USER_INGREDIENTS_RETURNED,
             userIngredients,
         };
+    }
+
+    async addUserIngredients() {}
+
+    //Helper Functions
+
+    async findIngredientsByUserId() {
+        const userId = [this.req.params.userId];
+        const results = await this.pool.query(
+            FIND_INGREDIENT_ID_BY_USER,
+            userId
+        );
+        return results;
     }
 }
 

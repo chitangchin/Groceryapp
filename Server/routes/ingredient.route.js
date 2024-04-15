@@ -3,6 +3,9 @@ const ingredientRouter = express.Router();
 const IngredientController = require('../controllers/ingredient.controller');
 const auth = require('../middleware/auth');
 
-ingredientRouter.route('/').get(auth.verifyUser, IngredientController.fetchAll); // update with proper function
+ingredientRouter
+    .use(auth.verifyUser)
+    .route('/')
+    .get(IngredientController.fetchAll); // update with proper function
 
 module.exports = ingredientRouter;

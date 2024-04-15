@@ -121,4 +121,4 @@ ownedRouter
             .catch((err) => next(err));
     });
 
-module.exports = ownedRouter;
+//module.exports = ownedRouter;

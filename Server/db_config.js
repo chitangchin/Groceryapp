@@ -12,6 +12,17 @@ const pool = new Pool({
     connectionTimeoutMillis: 0,
 });
 
+const dbConnect = async () => {
+    try {
+        client = await pool.connect();
+        console.log('DB connected Successfully');
+        client.release();
+    } catch (err) {
+        console.error('DB not connected', err);
+    }
+};
+
 module.exports = {
     pool,
+    dbConnect,
 };

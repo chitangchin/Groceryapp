@@ -8,7 +8,7 @@ ownedRouter
     .route('/:userId')
     .all(auth.verifyUser, (req, res, next) => {
         try {
-            if (req.params.userId !== req.user.id) {
+            if (req.params.userId !== req.user.userId) {
                 throw 'error';
             }
             res.statusCode = 200;

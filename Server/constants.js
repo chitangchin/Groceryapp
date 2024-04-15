@@ -41,6 +41,10 @@ const FAILED_TO_RETRIEVE_INGREDIENTS = 'Failed to retrieve ingredients';
 const ALL_INGREDIENTS_RETURNED = 'All ingredients returned';
 const NO_INGREDIENTS_OWNED = 'User has no ingredients';
 const USER_INGREDIENTS_RETURNED = 'All user ingredients returned';
+const ERROR_ADD_INGREDIENTS = 'There was a problem adding your ingredients';
+const INGREDIENTS_ADDED = ' ingredients added to your list';
+const NO_INGREDIENTS_DELETED = 'No ingredients deleted';
+const ALL_INGREDIENTS_DELETED = 'All users ingredients deleted';
 
 //Queries
 const FIND_ALL_USERS_BY_USERNAME = 'SELECT * FROM users WHERE username = $1';
@@ -49,6 +53,10 @@ const INSERT_INTO_USERS_USERNAME_AND_PASSWORD =
 const FIND_ALL_INGREDIENTS = 'SELECT * FROM ingredients';
 const FIND_INGREDIENT_ID_BY_USER =
     'SELECT ingredient_id FROM ingredients_owned WHERE user_id = $1;';
+const INSERT_INTO_USER_INGREDIENTS =
+    'INSERT INTO ingredients_owned (user_id, ingredient_id) VALUES %L RETURNING ingredient_id';
+const DELETE_USER_INGREDIENTS =
+    'DELETE FROM ingredients_owned WHERE user_id = $1 RETURNING ingredient_id;';
 
 module.exports = {
     INVALID_INGREDIENTS,
@@ -84,4 +92,10 @@ module.exports = {
     NO_INGREDIENTS_OWNED,
     USER_INGREDIENTS_RETURNED,
     FIND_INGREDIENT_ID_BY_USER,
+    ERROR_ADD_INGREDIENTS,
+    INGREDIENTS_ADDED,
+    NO_INGREDIENTS_DELETED,
+    ALL_INGREDIENTS_DELETED,
+    INSERT_INTO_USER_INGREDIENTS,
+    DELETE_USER_INGREDIENTS,
 };

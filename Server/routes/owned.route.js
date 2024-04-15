@@ -2,9 +2,11 @@ const express = require('express');
 const ownedRouter = express.Router();
 const OwnedController = require('../controllers/owned.controller');
 
-ownedRouter.route('/:userId').get(OwnedController.fetchAllUserIngredients);
-//.post(OwnedController.addUserIngredients)
-//.delete(OwnedController.deleteAllUserIngredients)
+ownedRouter
+    .route('/:userId')
+    .get(OwnedController.fetchAllUserIngredients)
+    .post(OwnedController.addUserIngredients)
+    .delete(OwnedController.deleteAllUserIngredients);
 //.put(OwnedController.notSupported);
 
 /*

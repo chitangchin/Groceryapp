@@ -24,6 +24,38 @@ class OwnedController {
             res.status(INTERNAL_SERVER_ERROR).json(UNEXPECTED_ERROR);
         }
     }
+
+    async addUserIngredients(req, res) {
+        const ownedService = new OwnedService(pool, req);
+        try {
+            const addUserIngredientsResponse =
+                await ownedService.addUserIngredients();
+
+            res.status(addUserIngredientsResponse.status).json(
+                addUserIngredientsResponse.message
+            );
+            logger.info(addUserIngredientsResponse.message);
+        } catch (err) {
+            console.error(err);
+            res.status(INTERNAL_SERVER_ERROR).json(UNEXPECTED_ERROR);
+        }
+    }
+
+    async deleteAllUserIngredients(req, res) {
+        const ownedService = new OwnedService(pool, req);
+        try {
+            const deleteAllResponse =
+                await ownedService.deleteAllUserIngredients();
+
+            res.status(deleteAllResponse.status).json(
+                deleteAllResponse.message
+            );
+            logger.info(deleteAllResponse.message);
+        } catch (err) {
+            console.error(err);
+            res.status(INTERNAL_SERVER_ERROR).json(UNEXPECTED_ERROR);
+        }
+    }
 }
 
 module.exports = new OwnedController();

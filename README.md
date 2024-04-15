@@ -28,14 +28,12 @@ If a user puts in the items they have in the fridge, it can generate a list of r
 
 ## Technologies
 
-- React.js
-- Redux
+- NextJ
 - Node.js
 - Express.js
 - PostgreSQL
 - Tailwind CSS
 - JWT Authentication
-- NextJs
 
 ## Getting Started
 

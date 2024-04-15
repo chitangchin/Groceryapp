@@ -37,6 +37,8 @@ const MISSING_INGREDIENTS = 'Missing ingredients in request';
 const FAILED_TO_RETRIEVE_RECIPES = 'Failed to retrieve recipes';
 const INVALID_INGREDIENTS =
     'Invalid ingredients provided. Must be an array of strings with length between 2 and 20 characters long';
+const FAILED_TO_RETRIEVE_INGREDIENTS = 'Failed to retrieve ingredients';
+const ALL_INGREDIENTS_RETURNED = 'All ingredients returned';
 
 //Queries
 const FIND_ALL_USERS_BY_USERNAME = 'SELECT * FROM users WHERE username = $1';
@@ -73,4 +75,6 @@ module.exports = {
     FIND_ALL_USERS_BY_USERNAME,
     INSERT_INTO_USERS_USERNAME_AND_PASSWORD,
     FIND_ALL_INGREDIENTS,
+    FAILED_TO_RETRIEVE_INGREDIENTS,
+    ALL_INGREDIENTS_RETURNED,
 };

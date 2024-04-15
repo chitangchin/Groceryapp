@@ -1,9 +1,14 @@
-const { FIND_ALL_INGREDIENTS, NOT_FOUND, OK } = require('../constants');
+const {
+    FIND_ALL_INGREDIENTS,
+    NOT_FOUND,
+    OK,
+    FAILED_TO_RETRIEVE_INGREDIENTS,
+    ALL_INGREDIENTS_RETURNED,
+} = require('../constants');
 
 class IngredientService {
-    constructor(pool, auth) {
+    constructor(pool) {
         this.pool = pool;
-        this.auth = auth;
     }
 
     async fetchAll() {
@@ -11,10 +16,13 @@ class IngredientService {
         const ingredients = results.rows;
 
         if (!ingredients) {
-            return { status: NOT_FOUND, message: 'No ingredients' };
+            return {
+                status: NOT_FOUND,
+                message: FAILED_TO_RETRIEVE_INGREDIENTS,
+            };
         }
 
-        return { status: OK, message: 'All ingredients returned', ingredients };
+        return { status: OK, message: ALL_INGREDIENTS_RETURNED, ingredients };
     }
 }
 

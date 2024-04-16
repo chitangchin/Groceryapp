@@ -1,4 +1,10 @@
-const { INTERNAL_SERVER_ERROR, OK, UNEXPECTED_ERROR } = require('../constants');
+const {
+    INTERNAL_SERVER_ERROR,
+    OK,
+    UNEXPECTED_ERROR,
+    NOT_IMPLEMENTED,
+    OPERATION_NOT_SUPPORTED,
+} = require('../constants');
 const { pool } = require('../db_config');
 const OwnedService = require('../service/owned.service');
 const logger = require('pino')();
@@ -51,6 +57,15 @@ class OwnedController {
                 deleteAllResponse.message
             );
             logger.info(deleteAllResponse.message);
+        } catch (err) {
+            console.error(err);
+            res.status(INTERNAL_SERVER_ERROR).json(UNEXPECTED_ERROR);
+        }
+    }
+
+    async notSupported(req, res) {
+        try {
+            res.status(NOT_IMPLEMENTED).json(OPERATION_NOT_SUPPORTED);
         } catch (err) {
             console.error(err);
             res.status(INTERNAL_SERVER_ERROR).json(UNEXPECTED_ERROR);

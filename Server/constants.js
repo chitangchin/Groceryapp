@@ -18,6 +18,7 @@ const UNAUTHORIZED = 401;
 const NOT_FOUND = 404;
 const CONFLICT = 409;
 const INTERNAL_SERVER_ERROR = 500;
+const NOT_IMPLEMENTED = 501;
 
 //Response messages
 const BAD_USERNAME =
@@ -57,6 +58,7 @@ const INSERT_INTO_USER_INGREDIENTS =
     'INSERT INTO ingredients_owned (user_id, ingredient_id) VALUES %L RETURNING ingredient_id';
 const DELETE_USER_INGREDIENTS =
     'DELETE FROM ingredients_owned WHERE user_id = $1 RETURNING ingredient_id;';
+const OPERATION_NOT_SUPPORTED = 'Operation not supported';
 
 module.exports = {
     INVALID_INGREDIENTS,
@@ -98,4 +100,6 @@ module.exports = {
     ALL_INGREDIENTS_DELETED,
     INSERT_INTO_USER_INGREDIENTS,
     DELETE_USER_INGREDIENTS,
+    NOT_IMPLEMENTED,
+    OPERATION_NOT_SUPPORTED,
 };

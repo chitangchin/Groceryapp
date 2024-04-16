@@ -6,17 +6,14 @@ ownedRouter
     .route('/:userId')
     .get(OwnedController.fetchAllUserIngredients)
     .post(OwnedController.addUserIngredients)
-    .delete(OwnedController.deleteAllUserIngredients);
-//.put(OwnedController.notSupported);
+    .delete(OwnedController.deleteAllUserIngredients)
+    .put(OwnedController.notSupported);
 
-/*
 ownedRouter
     .route('/:userId/:ingredientId')
-    .get(OwnedController.fetchAllUserIngredients)
-    .delete(OwnedController.deleteAllUserIngredients)
+    //.get(OwnedController.fetchAllUserIngredients)
+    //.delete(OwnedController.deleteAllUserIngredients)
     .put(OwnedController.notSupported)
     .post(OwnedController.notSupported);
-
-    */
 
 module.exports = ownedRouter;

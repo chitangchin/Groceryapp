@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import NutritionWidget from '@/app/Components/NutritionWidget';
+import NutritionWidget from '@/app/components/NutritionWidget';
 
 const RecipeDetailPage = ({ params }) => {
   const { recipeId } = params;

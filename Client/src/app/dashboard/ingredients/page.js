@@ -6,13 +6,15 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import IngredientsContext from '@/app/Context/ingredientsContext';
 
 //Components
+import IngredientSearch from '@/app/Components/IngredientSearch.js';
+// import { useRouter } from 'next/router';
 import IngredientsBox from '@/app/Components/ingredientsBox'; //WORK IN PROGRESS
 
 const Ingredients = () => {
 
   // State
   const [ingredients, setIngredients] = useContext(IngredientsContext);
-  const [edit, setEdit] = useState(false);
+  // const [edit, setEdit] = useState(false);
   const [newUser, setNewUser] = useState(false);
   const inputIngredient = useRef(null);
 
@@ -35,22 +37,22 @@ const Ingredients = () => {
     )
   }
 
-  const addIngredients = () => {
-    let ingredientEntered = inputIngredient.current.value;
-    //*Change the condition here to check if it exists as a valid ingredient
-    if (ingredientEntered.length > 0) {
-      setIngredients(existingValues => [...existingValues, ingredientEntered]);
-    }
-  }
+  // const addIngredients = () => {
+  //   let ingredientEntered = inputIngredient.current.value;
+  //   //*Change the condition here to check if it exists as a valid ingredient
+  //   if (ingredientEntered.length > 0) {
+  //     setIngredients(existingValues => [...existingValues, ingredientEntered]);
+  //   }
+  // }
 
-  const editIngredients = (itemString) => {
-    const currArr = ingredients;
-    var index = currArr.indexOf(itemString);
-    if (index !== -1) {
-      currArr.splice(index, 1);
-      setIngredients(currArr);
-    }
-  }
+  // const editIngredients = (itemString) => {
+  //   const currArr = ingredients;
+  //   var index = currArr.indexOf(itemString);
+  //   if (index !== -1) {
+  //     currArr.splice(index, 1);
+  //     setIngredients(currArr);
+  //   }
+  // }
 
   // - Database Requests
   const IngredientsRequestDB = () => {
@@ -65,21 +67,25 @@ const Ingredients = () => {
     //*Add post request logic
     router.push(`/dashboard`);
   }
+  const IngredientsPutRequestDB = () => {
+    //*Add post request logic
+    router.push(`/dashboard`);
+  }
 
   // - Displayed Components
-  const IngredientsSearch = () => {
-    return (<div>
-      <input
-        className="text-center border-2 border-black"
-        type="text"
-        placeholder="Enter ingredients you have"
-        ref={inputIngredient}
-      />
-      <button onClick={addIngredients}>
-        click here
-      </button>
-    </div>);
-  }
+  // const IngredientSearch = () => {
+  //   return (<div>
+  //     <input
+  //       className="text-center border-2 border-black"
+  //       type="text"
+  //       placeholder="Enter ingredients you have"
+  //       ref={inputIngredient}
+  //     />
+  //     {/* <button onClick={addIngredients}>
+  //       click here
+  //     </button> */}
+  //   </div>);
+  // }
 
   const IngredientsBox = () => {
     return ingredients.map((ingredient) =>
@@ -89,15 +95,16 @@ const Ingredients = () => {
       </li>);
   }
 
-  const EditIngredientsButton = () => {
-    setEdit(true);
-    return;
-  }
+  // const EditIngredientsButton = () => {
+  //   setEdit(true);
+  //   return;
+  // }
 
-  const SaveIngredientsButton = () => {
-    setEdit(false);
-    return;
-  }
+  // const SaveIngredientsButton = () => {
+  //   setEdit(false);
+  //   return;
+  // }
+  
 
   return (
 
@@ -105,12 +112,15 @@ const Ingredients = () => {
       <Suspense>
         <NewUserCheckFunction />
       </Suspense>
-      <IngredientsSearch />
+      <IngredientSearch />
       <IngredientsBox />
-      {edit ?
+      {/* {edit ?
         <button onClick={SaveIngredientsButton}>Save</button> :
-        <button onClick={EditIngredientsButton}>Edit</button>}
-      <button onClick={IngredientsRequestDB}>
+        <button onClick={EditIngredientsButton}>Edit</button>} */}
+      
+      
+
+      <button onClick={IngredientsRequestDB} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-8" >
         Next
       </button>
     </div>

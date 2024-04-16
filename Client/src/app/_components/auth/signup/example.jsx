@@ -42,9 +42,7 @@ const example = () => {
   >
     Sign In
   </button>
-  <a href="/forgot-password" className="inline-block align-baseline font-bold text-sm text-teal-500 hover:text-teal-800">
-    Forgot Password?
-  </a>
+  
 </div>
 </form>
     </div>

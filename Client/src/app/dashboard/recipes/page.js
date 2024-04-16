@@ -29,13 +29,13 @@
 // }
 
 // export default Recipes
-"use client"
+
 "use client";
 import { useContext } from 'react';
 import RecipesContext from '../../Context/recipeContextProvider.js';
 import RecipeCards from '@/app/Components/recipeCards.js'; // Corrected component name
 import { useRouter } from 'next/router';
-import RecipePage from '../components/RecipePage';
+// import RecipePage from '../components/RecipePage';
 
 const Recipes = () => {
   const router = useRouter();
@@ -51,6 +51,7 @@ const Recipes = () => {
 
   return (
     <div>
+      
       <button onClick={onClick}>here</button>
       {/* Render RecipePage component with selectedIngredients prop */}
       <div>

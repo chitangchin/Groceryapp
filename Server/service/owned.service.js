@@ -11,6 +11,10 @@ const {
     ALL_INGREDIENTS_DELETED,
     INSERT_INTO_USER_INGREDIENTS,
     DELETE_USER_INGREDIENTS,
+    ONE_USER_INGREDIENT_RETURNED,
+    SELECT_ONE_USER_INGREDIENT,
+    DELETE_SPECIFIC_INGREDIENT,
+    USER_DELETED_INGREDIENT,
 } = require('../constants');
 
 class OwnedService {
@@ -73,6 +77,43 @@ class OwnedService {
         };
     }
 
+    async deleteUserIngredient() {
+        const results = await this.deleteOneUserIngredient();
+        const rowCount = results.rowCount;
+        const deletedIngredientId = results.rows[0]['ingredient_id'];
+
+        if (!rowCount) {
+            return {
+                status: NOT_FOUND,
+                message: NO_INGREDIENTS_DELETED,
+            };
+        }
+
+        return {
+            status: OK,
+            message: USER_DELETED_INGREDIENT + deletedIngredientId,
+        };
+    }
+
+    async fetchUserIngredient() {
+        const results = await this.findIngredientByUserId();
+        const userIngredient = results.rows;
+        const rowCount = results.rowCount;
+
+        if (!rowCount) {
+            return {
+                status: NOT_FOUND,
+                message: USER_DOESNT_OWN,
+            };
+        }
+
+        return {
+            status: OK,
+            message: ONE_USER_INGREDIENT_RETURNED,
+            userIngredient,
+        };
+    }
+
     //Helper Functions
 
     async findIngredientsByUserId() {
@@ -106,6 +147,27 @@ class OwnedService {
     async deleteUserIngredients() {
         const userId = [this.req.params.userId];
         const results = this.pool.query(DELETE_USER_INGREDIENTS, userId);
+        return results;
+    }
+
+    async deleteOneUserIngredient() {
+        const parameters = [
+            this.req.params.userId,
+            this.req.params.ingredientId,
+        ];
+        const results = this.pool.query(DELETE_SPECIFIC_INGREDIENT, parameters);
+        return results;
+    }
+
+    async findIngredientByUserId() {
+        const parameters = [
+            this.req.params.userId,
+            this.req.params.ingredientId,
+        ];
+        const results = await this.pool.query(
+            SELECT_ONE_USER_INGREDIENT,
+            parameters
+        );
         return results;
     }
 }

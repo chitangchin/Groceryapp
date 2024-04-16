@@ -46,6 +46,10 @@ const ERROR_ADD_INGREDIENTS = 'There was a problem adding your ingredients';
 const INGREDIENTS_ADDED = ' ingredients added to your list';
 const NO_INGREDIENTS_DELETED = 'No ingredients deleted';
 const ALL_INGREDIENTS_DELETED = 'All users ingredients deleted';
+const ONE_USER_INGREDIENT_RETURNED = 'User ingredient returned';
+const USER_DOESNT_OWN = 'User does not own ingredient';
+const OPERATION_NOT_SUPPORTED = 'Operation not supported';
+const USER_DELETED_INGREDIENT = 'User deleted ingredient with id: ';
 
 //Queries
 const FIND_ALL_USERS_BY_USERNAME = 'SELECT * FROM users WHERE username = $1';
@@ -58,7 +62,10 @@ const INSERT_INTO_USER_INGREDIENTS =
     'INSERT INTO ingredients_owned (user_id, ingredient_id) VALUES %L RETURNING ingredient_id';
 const DELETE_USER_INGREDIENTS =
     'DELETE FROM ingredients_owned WHERE user_id = $1 RETURNING ingredient_id;';
-const OPERATION_NOT_SUPPORTED = 'Operation not supported';
+const SELECT_ONE_USER_INGREDIENT =
+    'SELECT ingredient_id FROM ingredients_owned WHERE user_id = $1 AND ingredient_id = $2';
+const DELETE_SPECIFIC_INGREDIENT =
+    'DELETE FROM ingredients_owned WHERE user_id = $1 AND ingredient_id = $2 RETURNING ingredient_id';
 
 module.exports = {
     INVALID_INGREDIENTS,
@@ -102,4 +109,9 @@ module.exports = {
     DELETE_USER_INGREDIENTS,
     NOT_IMPLEMENTED,
     OPERATION_NOT_SUPPORTED,
+    ONE_USER_INGREDIENT_RETURNED,
+    USER_DOESNT_OWN,
+    SELECT_ONE_USER_INGREDIENT,
+    DELETE_SPECIFIC_INGREDIENT,
+    USER_DELETED_INGREDIENT,
 };

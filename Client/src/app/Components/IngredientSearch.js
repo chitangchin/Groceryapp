@@ -73,13 +73,18 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+// We can optimize by reducing dependency injection - Brandon
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const IngredientSearch = () => {
   const [ingredientSearch, setIngredientSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
+
+  // We wont need to call recipes here as state we can use context - Brandon
+  // However we can get all recipes here so that we wont have to do it later on, we can update recipe state based on ingredients added or deleted
+
     const [recipes, setRecipes] = useState([]);
     const router = useRouter();
     if (!router) {
@@ -87,6 +92,9 @@ const IngredientSearch = () => {
   return <div>Loading...</div>;
 }
 //   const router = typeof window !== 'undefined' ? useRouter() : null;?
+
+// We will have the call in the backend and we will query the backend route here - Brandon
+// Also see if this data can be copied and pasted into the dummydata file so we dont consume api resources
 const handleSearchInputChange = async (e) => {
   setIngredientSearch(e.target.value);
   try {
@@ -122,6 +130,7 @@ const handleSearchInputChange = async (e) => {
     };
      const handleNextButtonClick = () => {
     // Navigate to the recipe page with selected ingredient
+    //We should avoid adding ingredients into parameter for ingredients as the url can get incredibly long - Brandon
       router.push({
       pathname: '/recipes',
       query: { ingredients: selectedIngredients.join(',') },
@@ -148,7 +157,6 @@ const handleSearchInputChange = async (e) => {
 
   return (
  <div className="container mx-auto px-4 py-8">
-    <h2 className="text-2xl font-bold mb-4">Let's get started by adding the ingredients you already have!</h2>
     <div className="relative">
       <input
         type="text"
@@ -166,10 +174,10 @@ const handleSearchInputChange = async (e) => {
               onClick={() => result.alreadySelected ? handleRemoveIngredient(result.name) : handleAddIngredient(result.name)}
             >
               <span>{result.name}</span>
-              <FontAwesomeIcon
+              {/* <FontAwesomeIcon
                 icon={result.alreadySelected ? faMinus : faPlus}
                 className={`text-${result.alreadySelected ? 'red' : 'blue'}-500`}
-              />
+              /> */}
             </div>
           ))}
         </div>
@@ -184,7 +192,7 @@ const handleSearchInputChange = async (e) => {
             className="flex items-center px-3 py-1 rounded-md bg-green-200 text-green-800 hover:bg-green-300 cursor-pointer"
             onClick={() => handleRemoveIngredient(ingredient)}
           >
-            <FontAwesomeIcon icon={faMinus} className="mr-2" />
+            {/* <FontAwesomeIcon icon={faMinus} className="mr-2" /> */}
             <span>{ingredient}</span>
           </div>
         ))}

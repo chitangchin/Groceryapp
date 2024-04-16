@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 const RecipePage = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
 
+
+  //This is good, we can move this to the recipes page we should make a post request to backend route with ingredients array and it will return the array of recipes which we can map
   useEffect(() => {
     // Fetch recipes based on selected ingredients
     const apiKey = 'ae9fab0183fd48e9b6af4a983da4897f'; // Update with Spoonacular API key

@@ -4,6 +4,8 @@ import { RecipesProvider } from "./Context/recipeContextProvider";
 import { IngredientsProvider } from "./Context/ingredientsContext";
 import { UsernameProvider } from "./Context/userContext"
 import { LoggedInProvider } from "./Context/loggedInContext";
+import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +18,7 @@ export default function RootLayout({ children }) {
  return (
     <html lang="en">
       <body>
+        <Navbar />
         <LoggedInProvider>
         <UsernameProvider>
         <IngredientsProvider>
@@ -25,7 +28,8 @@ export default function RootLayout({ children }) {
         </IngredientsProvider>
         </UsernameProvider>
         </LoggedInProvider>
-          </body>
+        <Footer />
+      </body>
     </html>
   )
 }

@@ -2,8 +2,10 @@ import { useRouter } from "next/navigation";
 import React, { useState } from 'react'
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { CreateAccount } from "./CreateAccount";
-export const SignupForm = () => {
+import { CreateAccountInfo } from "./CreateAccountInfo";
+import { MdOutlineAlternateEmail } from "react-icons/md";
+import Link from "next/link";
+export const RegisterForm = () => {
   const router = useRouter();
 
   const [username, setUsername] = useState('');
@@ -45,10 +47,10 @@ export const SignupForm = () => {
   
   return (
     <div>
-      <div className="grid grid-cols-10 grid-rows-10 gap-4 h-screen bg-gray-800 bg-opacity-50">
-                <div className="col-start-2 col-span-3 row-start-3 row-span-6 text-xs shadow-black shadow-2xl bg-white rounded-lg p-8 opacity-85">
-                    <h2 className="text-2xl text-black text-center font-bold ">Sign Up</h2>
-                    <div className=" space-y-6 flex-col justify-center items-center mt-4">
+      <div className="grid grid-cols-10 grid-rows-10 gap-4 h-screen bg-black bg-opacity-25">
+                <div className="col-start-2 col-span-3 row-start-3 row-span-6  text-xs shadow-black shadow-2xl bg-white rounded-lg p-8 opacity-85">
+                    <h2 className="text-2xl text-black text-center font-bold ">Create Account</h2>
+                    <div className=" space-y-5 flex-col justify-center items-center mt-4">
                     <div className="relative">
                       <FaUser className="absolute inset-2 left-2 
                         flex items-center  
@@ -60,6 +62,20 @@ export const SignupForm = () => {
                           value={username}
                           required
                           onChange={(e) => setUsername(e.target.value)}
+                          className="text-black w-full px-4 py-2 pl-8 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                      />
+                    </div>
+                     <div className="relative">
+                      <MdOutlineAlternateEmail  className="absolute inset-2 left-2 
+                        flex items-center  
+                        text-base text-gray-500 " /> 
+                      <input
+                          id="email"
+                          type="email"
+                          placeholder="your@email.com"
+                          value={username}
+                          required
+                          onChange={(e) => setEmail(e.target.value)}
                           className="text-black w-full px-4 py-2 pl-8 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                       />
                     </div>
@@ -89,8 +105,9 @@ export const SignupForm = () => {
                       />
                     </div>     
                         
-                        <div className="flex items-center mx-1">
-                        <input
+                      <div className="flex items-center justify-between ml-1">
+                       <div>
+                       <input
                             type="checkbox"
                             checked={acceptTerms}
                             onChange={(e) => setAcceptTerms(e.target.checked)}
@@ -99,21 +116,19 @@ export const SignupForm = () => {
                         <label className="text-gray-500  ml-3">
                             I accept Terms and Conditions
                         </label>
+                       </div>
                         </div>
-                        <div className="flex justify-between mx-1">
-                          <a href="#" className=" font-bold text-xm text-blue-500 hover:text-blue-700">
+                        <div className="flex justify-between ml-1">
+                          <Link href="/api/auth/login" className=" font-bold text-xm text-blue-500 hover:text-blue-700">
                             Sign In
-                          </a>
-                          <a href="#" className=" font-bold text-xm text-blue-500 hover:text-blue-700">
-                            Forgot Password?
-                          </a>
+                          </Link>
                         </div>
                         <button
                             type="submit"
                             className="w-full px-4 py-2 text-white bg-[#f55a3e] rounded-md disabled:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-orange-800 focus:outline-none focus:bg-orange-800"
                             disabled={!acceptTerms || error} 
                         >
-                            Sign Up
+                            Register
                         </button>
                         </div>
                       {/* //TODO: Add error message
@@ -125,8 +140,8 @@ export const SignupForm = () => {
 
                 </div>
                     <div className="col-start-5 col-span-5 row-start-3 row-span-6 ">
-                      <div className="flex items-start justify-center h-full p-4">
-                        <CreateAccount/>
+                      <div className="flex items-center justify-center h-full p-4">
+                        <CreateAccountInfo/>
                       </div>
                     </div>
             </div>
@@ -136,4 +151,3 @@ export const SignupForm = () => {
   )
 }
 
-export default SignupForm

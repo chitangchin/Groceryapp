@@ -3,116 +3,87 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FaUser } from "react-icons/fa";
+import { MdOutlineAlternateEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { CreateAccountInfo } from "@/app/_components/auth/register/CreateAccountInfo";
 
-const Login = () => {
+
+export const Login = () => {
 const router = useRouter();
-    
-    const [selectedIngredients, setSelectedIngredients] = useState([]);
-    const [recipes, setRecipes] = useState([]);
-
-    const handleIngredientChange = (ingredient) => {
-        const index = selectedIngredients.indexOf(ingredient);
-        if (index === -1) {
-            setSelectedIngredients([...selectedIngredients, ingredient]);
-        } else {
-            const updatedIngredients = [...selectedIngredients];
-            updatedIngredients.splice(index, 1);
-            setSelectedIngredients(updatedIngredients);
-        }
-    };
-    function PlanMeal() {
-       
-        console.log("planmeal function working");
-     
-       
-        router.push('/Login');
-    }  
-
-   const generateRecipes = () => {
-    const apiKey = 'ae9fab0183fd48e9b6af4a983da4897f'; // Update with Spoonacular API key
-    // Call the Spoonacular API to generate recipes based on selected ingredients
-    fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${selectedIngredients.join(',')}&apiKey=${apiKey}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch recipes');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Set the recipes state with the fetched data
-            setRecipes(data);
-        })
-        .catch(error => {
-            console.error('Error fetching recipes:', error);
-            // Handle errors here, e.g., show a message to the user
-        });
-};
+    const [username, setUsername] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     return (
-        <div className="container mx-auto mt-20 text-center">
-            <h1 className="text-3xl font-bold mb-8">Login</h1>
-            <h1>Hello User!</h1>
-            <Link href="./PlanMeal">
-        <button  type="button"className="bg-teal-600 hover:bg-black text-white py-2 px-4 rounded mr-4 m-3 w-auto">
-          Start Next plan
-          </button></Link>
-     
-            <h2>Select ingredient(s) to generate recipe</h2>
-            <div>
-                {/* Render checkboxes for each ingredient */}
-                <label>
-                    <input
-                        type="checkbox"
-                        value="apples"
-                        onChange={() => handleIngredientChange("apples")}
-                    />
-                    Apples
-                </label>
-                <br />
-                <label>
-                    <input
-                        type="checkbox"
-                        value="flour"
-                        onChange={() => handleIngredientChange("flour")}
-                    />
-                    Flour
-                </label>
-                <br />
-                <label>
-                    <input
-                        type="checkbox"
-                        value="sugar"
-                        onChange={() => handleIngredientChange("sugar")}
-                    />
-                    Sugar
-                </label>
-                {/* Add more checkboxes for other ingredients */}
-            </div>
-            <button type="button"
-                onClick={generateRecipes}
-                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4"
-            >
-                Generate Recipes
-            </button>
-            {/* Display generated recipes */}
-            <div className="mt-4">
-                {recipes.map(recipe => (
-                    <div key={recipe.id}>
-                        <Image src={recipe.image}
-                            width={312}
-                            height={231}
-                            alt={recipe.title} className="mb-2" />
-                        <p className="font-bold">{recipe.title}</p>
-                        <ul>
-                            {recipe.missedIngredients.map((ingredient) => (
-                                <li key={ingredient.id}>{ingredient.original}</li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
-            </div>
-        </div>
+        <div className="bg-login bg-cover ">
+        <div className="grid grid-cols-10 grid-rows-10 gap-4 h-screen bg-black bg-opacity-25">
+                  <div className="col-start-2 col-span-3 row-start-4 row-span-4 text-xs shadow-black shadow-2xl bg-white rounded-lg p-8 opacity-85">
+                      <h2 className="text-2xl text-black text-center font-bold ">Log In</h2>
+                      <div className=" space-y-5 flex-col justify-center items-center mt-4">
+                      <div className="relative">
+                        <FaUser className="absolute inset-2 left-2 
+                          flex items-center  
+                          text-base text-gray-500 " /> 
+                        <input
+                            id="username"
+                            type="text"
+                            placeholder="Enter username"
+                            value={username}
+                            required
+                            onChange={(e) => setUsername(e.target.value)}
+                            className="text-black w-full px-4 py-2 pl-8 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                        />
+                      </div>
+                      
+                      <div className="relative">
+                        <RiLockPasswordFill className="absolute inset-2 left-2
+                        flex items-center  
+                        text-base text-gray-500 " />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="text-black w-full px-4 py-2 pl-8 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                        />
+                      </div>
+                     
+                          
+                          <div className="flex justify-between mx-1">
+                            <Link href="/api/auth/register" className=" font-bold text-xm text-blue-500 hover:text-blue-700">
+                              Create Account
+                            </Link>
+                            <a href="#" className=" font-bold text-xm text-blue-500 hover:text-blue-700">
+                              Forgot Password?
+                            </a>
+                          </div>
+                          <button
+                              type="submit"
+                              className="w-full px-4 py-2 text-white bg-[#f55a3e] rounded-md disabled:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-orange-800 focus:outline-none focus:bg-orange-800"
+                              disabled={password !== repeatPassword || error} 
+                          >
+                              Login
+                          </button>
+                          </div>
+                        {/* //TODO: Add error message
+                        //TODO: Add success message
+                        //TODO: Add loading indicator
+                        //TODO: Add password visibility toggle
+                        //TODO: Add repeat password visibility toggle
+                      //TODO: Add validation for email and password */}
+  
+                  </div>
+                      <div className="col-start-5 col-span-5 row-start-3 row-span-6 ">
+                        <div className="flex items-center justify-center h-full p-4">
+                          <CreateAccountInfo/>
+                        </div>
+                      </div>
+              </div>
+             
+      </div>
     );
 };
 
-export default Login;
+export default Login

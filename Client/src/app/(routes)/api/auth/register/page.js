@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import Head from 'next/head';
-import SignupForm from "@/app/_components/auth/signup/SignupForm";
+import {RegisterForm} from "@/app/_components/auth/register/RegisterForm";
 
 
 export default function SignUp() {
@@ -12,7 +12,7 @@ export default function SignUp() {
                 <title>Signup</title>
                 <meta name="description" content="Sign up page" />
         </Head> */}
-            <SignupForm/>
+            <RegisterForm/>
         </div>
     );
 }

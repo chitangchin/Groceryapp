@@ -1,4 +1,84 @@
-export const testIngredient = [{"ingredient_id":123},{"ingredient_id":46}]
+export const testIngredient = [{"ingredient_id":123},{"ingredient_id":46}];
+
+export const testIngredientAuto = ["apple", "banana", "chocolate"];
+
+export const testRecipeID = {
+    "id": 640352,
+    "title": "Cranberry Apple Crisp",
+    "image": "https://img.spoonacular.com/recipes/640352-312x231.jpg",
+    "imageType": "jpg",
+    "usedIngredientCount": 1,
+    "missedIngredientCount": 3,
+    "missedIngredients": [
+        {
+            "id": 9078,
+            "amount": 2,
+            "unit": "cups",
+            "unitLong": "cups",
+            "unitShort": "cup",
+            "aisle": "Produce",
+            "name": "cranberries",
+            "original": "2 cups fresh cranberries",
+            "originalName": "fresh cranberries",
+            "meta": [
+                "fresh"
+            ],
+            "extendedName": "fresh cranberries",
+            "image": "https://img.spoonacular.com/ingredients_100x100/cranberries.jpg"
+        },
+        {
+            "id": 1145,
+            "amount": 4,
+            "unit": "Tbs",
+            "unitLong": "Tbs",
+            "unitShort": "Tbs",
+            "aisle": "Milk, Eggs, Other Dairy",
+            "name": "butter",
+            "original": "1/2 stick (4 Tbs) unsalted butter, cut into cubes",
+            "originalName": "1/2 stick unsalted butter, cut into cubes",
+            "meta": [
+                "unsalted",
+                "cut into cubes"
+            ],
+            "extendedName": "unsalted butter",
+            "image": "https://img.spoonacular.com/ingredients_100x100/butter-sliced.jpg"
+        },
+        {
+            "id": 8120,
+            "amount": 1.5,
+            "unit": "cups",
+            "unitLong": "cups",
+            "unitShort": "cup",
+            "aisle": "Cereal",
+            "name": "regular oats",
+            "original": "1 1/2 cups regular oats (not quick-cooking)",
+            "originalName": "regular oats (not quick-cooking)",
+            "meta": [
+                "(not quick-cooking)"
+            ],
+            "image": "https://img.spoonacular.com/ingredients_100x100/rolled-oats.jpg"
+        }
+    ],
+    "usedIngredients": [
+        {
+            "id": 1089003,
+            "amount": 4,
+            "unit": "cups",
+            "unitLong": "cups",
+            "unitShort": "cup",
+            "aisle": "Produce",
+            "name": "granny smith apples",
+            "original": "4 cups Granny Smith apples, chopped into ½ inch chunks",
+            "originalName": "Granny Smith apples, chopped into ½ inch chunks",
+            "meta": [
+                "chopped"
+            ],
+            "image": "https://img.spoonacular.com/ingredients_100x100/grannysmith-apple.png"
+        }
+    ],
+    "unusedIngredients": [],
+    "likes": 11
+}
 
 export const testRecipe = [
     {
@@ -287,92 +367,6 @@ export const testRecipe = [
         ],
         "unusedIngredients": [],
         "likes": 0
-    },
-    {
-        "id": 157103,
-        "title": "Apple Cinnamon Blondies",
-        "image": "https://img.spoonacular.com/recipes/157103-312x231.jpg",
-        "imageType": "jpg",
-        "usedIngredientCount": 1,
-        "missedIngredientCount": 4,
-        "missedIngredients": [
-            {
-                "id": 1001,
-                "amount": 0.5,
-                "unit": "cup",
-                "unitLong": "cups",
-                "unitShort": "cup",
-                "aisle": "Milk, Eggs, Other Dairy",
-                "name": "butter",
-                "original": "1/2 cup butter, melted",
-                "originalName": "butter, melted",
-                "meta": [
-                    "melted"
-                ],
-                "image": "https://img.spoonacular.com/ingredients_100x100/butter-sliced.jpg"
-            },
-            {
-                "id": 2010,
-                "amount": 1,
-                "unit": "tsp",
-                "unitLong": "teaspoon",
-                "unitShort": "tsp",
-                "aisle": "Spices and Seasonings",
-                "name": "cinnamon",
-                "original": "1 tsp. cinnamon",
-                "originalName": "cinnamon",
-                "meta": [],
-                "image": "https://img.spoonacular.com/ingredients_100x100/cinnamon.jpg"
-            },
-            {
-                "id": 1123,
-                "amount": 1,
-                "unit": "",
-                "unitLong": "",
-                "unitShort": "",
-                "aisle": "Milk, Eggs, Other Dairy",
-                "name": "egg",
-                "original": "1 egg",
-                "originalName": "egg",
-                "meta": [],
-                "image": "https://img.spoonacular.com/ingredients_100x100/egg.png"
-            },
-            {
-                "id": 1052050,
-                "amount": 1,
-                "unit": "tsp",
-                "unitLong": "teaspoon",
-                "unitShort": "tsp",
-                "aisle": "Baking",
-                "name": "vanilla",
-                "original": "1 tsp. vanilla (paste or extract)",
-                "originalName": "vanilla (paste or extract)",
-                "meta": [
-                    "(paste or extract)"
-                ],
-                "image": "https://img.spoonacular.com/ingredients_100x100/vanilla.jpg"
-            }
-        ],
-        "usedIngredients": [
-            {
-                "id": 9003,
-                "amount": 0.5,
-                "unit": "cup",
-                "unitLong": "cups",
-                "unitShort": "cup",
-                "aisle": "Produce",
-                "name": "apple",
-                "original": "1/2 cup apple, finely diced",
-                "originalName": "apple, finely diced",
-                "meta": [
-                    "diced",
-                    "finely"
-                ],
-                "extendedName": "diced apple",
-                "image": "https://img.spoonacular.com/ingredients_100x100/apple.jpg"
-            }
-        ],
-        "unusedIngredients": [],
-        "likes": 0
     }
 ]
+

@@ -29,17 +29,21 @@
 // }
 
 // export default Recipes
-"use client"
 "use client";
 import { useContext } from 'react';
 import RecipesContext from '../../Context/recipeContextProvider.js';
-import RecipeCards from '@/app/Components/recipeCards.js'; // Corrected component name
+//import RecipeCards from '@/app/Components/recipeCards.js'; // Corrected component name
 import { useRouter } from 'next/router';
-import RecipePage from '../components/RecipePage';
+//import RecipePage from '../components/RecipePage';
 
 const Recipes = () => {
-  const router = useRouter();
-  const { ingredients } = router.query;
+  //const router = useRouter();
+  // if (!router) {
+  //   // Handle the case when router is not available (e.g., during server-side rendering)
+  //   return <div>Loading...</div>;
+  // }
+
+  // const { ingredients } = router.query;
 
   // Using useContext to get recipes context
   const [recipes, setRecipes] = useContext(RecipesContext);
@@ -54,10 +58,12 @@ const Recipes = () => {
       <button onClick={onClick}>here</button>
       {/* Render RecipePage component with selectedIngredients prop */}
       <div>
-        <RecipePage selectedIngredients={ingredients ? ingredients.split(',') : []} />
+        {/* <RecipePage selectedIngredients={ingredients ? ingredients.split(',') : []} /> */}
       </div>
       {/* Render RecipeCards component */}
-      <RecipeCards recipes={recipes} /> {/* Assuming you pass recipes to RecipeCards */}
+      {/* <RecipeCards recipes={recipes} /> Assuming you pass recipes to RecipeCards */}
     </div>
   );
 }
+
+export default Recipes;

@@ -1,11 +1,7 @@
 const express = require('express');
 const ingredientRouter = express.Router();
 const IngredientController = require('../controllers/ingredient.controller');
-const auth = require('../middleware/auth');
 
-ingredientRouter
-    .use(auth.verifyUser)
-    .route('/')
-    .get(IngredientController.fetchAll); // update with proper function
+ingredientRouter.route('/').get(IngredientController.fetchAll);
 
 module.exports = ingredientRouter;

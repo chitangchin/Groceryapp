@@ -1,10 +1,17 @@
 "use client";
 import { useState } from 'react';
-import Image from 'next/image'
+import Image from 'next/image';
+import Link from 'next/link';
 
 const RecipeCards = (data) => {
 
   const [invalidImg, setInvalidImg] = useState(false);
+
+  const Recipe_Path = () => {
+    const formattedTitle = data.data.title.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
+    const path_result = `${formattedTitle}-${data.data.id}`;
+    return path_result;
+  }
 
   const MissingIngredients = () => {
     return data.data.missedIngredients.map((item, i) => <li key={item.id}>{item.name}</li>)
@@ -17,8 +24,8 @@ const RecipeCards = (data) => {
   return (
     <div>
       <Image
-        src={data.data.image}
-        alt="recipeImage"
+          src={data.data.image}
+          alt="recipeImage"
         width={0}
         height={0}
         style={{ width: '0', height: '0' }}
@@ -33,9 +40,16 @@ const RecipeCards = (data) => {
         height={100}
         style={{ width: 'auto', height: 'auto' }}
       />
-        <h1>
-          {data.data.title}
-        </h1>
+
+        
+
+        <Link href={`recipes/${Recipe_Path()}`}>
+          <h1>{data.data.title}</h1>
+          <h2>{Recipe_Path()}</h2>
+        </Link>
+      
+
+
         <h2>Missing Ingredients</h2>
         <MissingIngredients />
         <h2>Ingredients You own</h2>

@@ -79,6 +79,7 @@ import IngredientsContext from '../Context/ingredientsContext';
 
 const IngredientSearch = () => {
   const [selectedIngredients, setSelectedIngredients] = useContext(IngredientsContext);
+  // const [ ingredients, setIngredients ] = useContext(IngredientsContext);;
   const [ingredientSearch, setIngredientSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   // const [selectedIngredients, setSelectedIngredients] = useState([]);

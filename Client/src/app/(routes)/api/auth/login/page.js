@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -11,10 +11,10 @@ import { CreateAccountInfo } from "@/app/_components/auth/register/CreateAccount
 
 export const Login = () => {
 const router = useRouter();
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useRef('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useRef('');
 
     return (
         <div className="bg-login bg-cover ">

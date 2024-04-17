@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { CreateAccountInfo } from "./CreateAccountInfo";
@@ -13,13 +13,10 @@ export const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useRef(false);
 
   function handleSignUp() {
       console.log('Signing up with:', username, email, password, repeatPassword);
-   
-     
       router.push('/login');
   }
   const handleSubmit = async (event) => {
@@ -41,7 +38,7 @@ export const RegisterForm = () => {
 
       router.push('/dashboard');
     } catch (error) {
-      setErrorMsg('Invalid email or password');
+      setError('Invalid email or password');
     }
   };
   

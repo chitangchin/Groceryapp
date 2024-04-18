@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
 
+
 const NutritionWidget = ({ recipeId }) => {
   const [nutritionData, setNutritionData] = useState(null);
   //  const apiKey = "ae9fab0183fd48e9b6af4a983da4897f";
@@ -17,8 +18,10 @@ const NutritionWidget = ({ recipeId }) => {
             setNutritionData(data.nutrients);
 
             console.log("Data", data);
+            console.log(Array.isArray(data));
             console.log("Nutrition", data.nutrients);
-
+            console.log(Array.isArray(data.nutrients));
+            
           } else {
             console.error('Nutritional information not available');
           }
@@ -59,8 +62,8 @@ const NutritionWidget = ({ recipeId }) => {
         </div>
       </div>
 
-
-      <div className="p-1 border-2 border-black font-sans w-72">
+      {nutritionData && (
+        <div className="p-1 border-2 border-black font-sans w-72">
           <div className="text-4xl font-extrabold leading-none">Nutrition Facts</div>
           <div className="leading-snug">8 servings per container</div>
           <div className="flex justify-between font-bold border-b-8 border-black">
@@ -71,14 +74,14 @@ const NutritionWidget = ({ recipeId }) => {
                   <div className="font-bold">Amount per serving</div>
                   <div className="text-4xl">Calories</div>
               </div>
-              <div className="text-5xl">{ Math.floor(nutritionData[0].amount) }</div>
+                <div className="text-5xl">{Math.floor( nutritionData[0].amount )}</div>
           </div>
           <div className="border-t-4 border-black text-sm pb-1">
               <div className="text-right font-bold pt-1 pb-1">% Daily value*</div>
               <hr className="border-gray-500"/>
               <div className="flex justify-between">
                   <div>
-                      <span className="font-bold">Total Fat</span> 8g
+                      <span className="font-bold">Total Fat</span> {Math.floor(nutritionData[1].amount)}{nutritionData[1].unit}
                   </div>
                   <div className="font-bold">10%</div>
               </div>
@@ -160,7 +163,9 @@ const NutritionWidget = ({ recipeId }) => {
                   <div>The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
               </div>
           </div>
-      </div>
+        </div>
+      )}
+
     </div>
 
 

@@ -15,6 +15,10 @@ const NutritionWidget = ({ recipeId }) => {
           const data = await response.json();
           if (data && data.nutrients) {
             setNutritionData(data.nutrients);
+
+            console.log("Data", data);
+            console.log("Nutrition", data.nutrients);
+
           } else {
             console.error('Nutritional information not available');
           }
@@ -55,6 +59,7 @@ const NutritionWidget = ({ recipeId }) => {
         </div>
       </div>
 
+
       <div className="p-1 border-2 border-black font-sans w-72">
           <div className="text-4xl font-extrabold leading-none">Nutrition Facts</div>
           <div className="leading-snug">8 servings per container</div>
@@ -66,7 +71,7 @@ const NutritionWidget = ({ recipeId }) => {
                   <div className="font-bold">Amount per serving</div>
                   <div className="text-4xl">Calories</div>
               </div>
-              <div className="text-5xl">45</div>
+              <div className="text-5xl">{ Math.floor(nutritionData[0].amount) }</div>
           </div>
           <div className="border-t-4 border-black text-sm pb-1">
               <div className="text-right font-bold pt-1 pb-1">% Daily value*</div>

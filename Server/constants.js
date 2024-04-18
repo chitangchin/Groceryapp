@@ -57,13 +57,13 @@ const INSERT_INTO_USERS_USERNAME_AND_PASSWORD =
     'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id';
 const FIND_ALL_INGREDIENTS = 'SELECT * FROM ingredients';
 const FIND_INGREDIENT_ID_BY_USER =
-    'SELECT ingredient_id FROM ingredients_owned WHERE user_id = $1;';
+    'SELECT owned.ingredient_id, name FROM ingredients_owned AS owned INNER JOIN ingredients ON owned.ingredient_id = ingredients.id WHERE user_id = $1;';
 const INSERT_INTO_USER_INGREDIENTS =
     'INSERT INTO ingredients_owned (user_id, ingredient_id) VALUES %L RETURNING ingredient_id';
 const DELETE_USER_INGREDIENTS =
     'DELETE FROM ingredients_owned WHERE user_id = $1 RETURNING ingredient_id;';
 const SELECT_ONE_USER_INGREDIENT =
-    'SELECT ingredient_id FROM ingredients_owned WHERE user_id = $1 AND ingredient_id = $2';
+    'SELECT owned.ingredient_id, name FROM ingredients_owned AS owned INNER JOIN ingredients ON owned.ingredient_id = ingredients.id WHERE user_id = $1 AND ingredient_id = $2';
 const DELETE_SPECIFIC_INGREDIENT =
     'DELETE FROM ingredients_owned WHERE user_id = $1 AND ingredient_id = $2 RETURNING ingredient_id';
 

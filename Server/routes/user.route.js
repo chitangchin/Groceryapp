@@ -8,7 +8,7 @@ userRouter
 
 userRouter
     .route('/logout')
-    .post(UserController.logout);
+    .get(UserController.logout);
     
 userRouter
     .route('/register')

@@ -41,7 +41,7 @@ import { recipeDetailsDummy, nutritionDummy } from '../../../dummyData';
 //import NutritionWidget from '../../../Components/NutritionWidget';
 // import IngredientsPage from '@/app/Components/IngredientsPage.jsx';
 
-const RecipeDetailPage = () => {
+const RecipeDetailPage = (amountRecipe) => {
   const router = useRouter();
   const [ingredients, setIngredients] = useState([]);
   const [recipeDetails, setRecipeDetails] = useState(null);

@@ -1,69 +1,116 @@
 // "use client";
-// import { useContext} from 'react';
-// import RecipesContext from '../../Context/recipeContextProvider.js'
-// import recipeCards from '@/app/Components/recipeCards.js';
+// import { useContext } from 'react';
+// import RecipesContext from '../../Context/recipeContextProvider.js';
+// //import RecipeCards from '@/app/Components/recipeCards.js'; // Corrected component name
+// import { Link } from 'next';
+// //import RecipePage from '../components/RecipePage';
 
-// // get array of ids
-// // Pass recipe info to recipe card
+// //  <Link href={`/Recipes/${recipe.id}`} passHref> 
+
+// // const RecipeDetailPage = ({ params }) => {
+// //   const router = useRouter();
+// //   const { recipeId } = params;
+// //   const [ingredients, setIngredients] = useState([]);
+// //   const [recipeDetails, setRecipeDetails] = useState(null);
+// //   const [nutritionInfo, setNutritionInfo] = useState(null);
+// //   const [shoppingList, setShoppingList] = useState([]);
 
 // const Recipes = () => {
+//   //const router = useRouter();
+//   // if (!router) {
+//   //   // Handle the case when router is not available (e.g., during server-side rendering)
+//   //   return <div>Loading...</div>;
+//   // }
 
-// const [recipes, setRecipes] = useContext(RecipesContext);
+//   // const { ingredients } = router.query;
 
-// const onClick = () => {
+//   // Using useContext to get recipes context
+//   const [recipes, setRecipes] = useContext(RecipesContext);
 
-// }
-
-// // if refresh reset state to local storage
+//   // Function to handle button click
+//   const onClick = () => {
+//     // Your logic here
+//   };
 
 //   return (
 //     <div>
-//       <button onClick={onClick}>
-// here
-//       </button>
+//       <button onClick={onClick}>here</button>
+//       {/* Render RecipePage component with selectedIngredients prop */}
 //       <div>
-//         {/* Render all data into cards component from componenets folder */}
+//         {/* <RecipePage selectedIngredients={ingredients ? ingredients.split(',') : []} /> */}
 //       </div>
+//       {/* Render RecipeCards component */}
+//       {/* <RecipeCards recipes={recipes} /> Assuming you pass recipes to RecipeCards */}
 //     </div>
-//   )
+//   );
 // }
 
-// export default Recipes
-"use client";
-import { useContext } from 'react';
-import RecipesContext from '../../Context/recipeContextProvider.js';
-//import RecipeCards from '@/app/Components/recipeCards.js'; // Corrected component name
-import { useRouter } from 'next/router';
-//import RecipePage from '../components/RecipePage';
+// export default Recipes;
 
-const Recipes = () => {
-  //const router = useRouter();
-  // if (!router) {
-  //   // Handle the case when router is not available (e.g., during server-side rendering)
-  //   return <div>Loading...</div>;
-  // }
 
-  // const { ingredients } = router.query;
 
-  // Using useContext to get recipes context
-  const [recipes, setRecipes] = useContext(RecipesContext);
+"use client"
+import React, { useState, useEffect } from "react";
+import Image from "next/image.js";
+import Link from "next/link";
 
-  // Function to handle button click
-  const onClick = () => {
-    // Your logic here
+const recipes = () => {
+  const [recipes, setRecipes] = useState([]);
+    // const apiKey = "43090ee37698431d9400a53ec4cf8e5d";
+   const apiKey = "ae9fab0183fd48e9b6af4a983da4897f";
+  //  const apiKey = "4ea43c3d4d094e73bd1279ff484b7acf";
+  
+
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
+  const fetchRecipes = async () => {
+    try {
+      const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=20&apiKey=${apiKey}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch recipes');
+      }
+      const data = await response.json();
+      setRecipes(data.results);
+    } catch (error) {
+      console.error('Error fetching recipes:', error);
+    }
   };
 
+  if (!recipes.length) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-      <button onClick={onClick}>here</button>
-      {/* Render RecipePage component with selectedIngredients prop */}
-      <div>
-        {/* <RecipePage selectedIngredients={ingredients ? ingredients.split(',') : []} /> */}
+    <div className="container mx-auto py-8">
+      <h1 className="text-3xl font-bold mb-4">Recipes</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {recipes.map((recipe) => (
+          <div key={recipe.id} className="border rounded-md overflow-hidden">
+        
+              <Link href={`recipes/${recipe.id}`} passHref> 
+                <Image
+                  src={recipe.image}
+                  width={300}
+                  height={300}
+                  alt={recipe.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h2 className="text-lg font-semibold mb-2">{recipe.title}</h2>
+                  <p className="text-sm">{recipe.summary}</p>
+                </div>
+             
+            </Link>
+            <div className="bg-gray-100 p-4 flex justify-between">
+              <span className="text-sm">Rating: {recipe.spoonacularScore}/100</span>
+              <span className="text-sm">Cooking Time: {recipe.readyInMinutes} mins</span>
+            </div>
+          </div>
+        ))}
       </div>
-      {/* Render RecipeCards component */}
-      {/* <RecipeCards recipes={recipes} /> Assuming you pass recipes to RecipeCards */}
     </div>
   );
-}
-
-export default Recipes;
+};
+export default recipes;

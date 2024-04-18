@@ -43,23 +43,11 @@ const RecipeCards = (data) => {
 
         
         
-        <Link href={`dashboard/recipes/${encodeURIComponent(Recipe_Path())}`}>
+        <Link href="dashboard/recipes/[recipe]">
 
           <h1>{data.data.title}</h1>
           <h2>{Recipe_Path()}</h2>
-        </Link>
-
-        <Link
-            href={{
-              pathname: 'dashboard/recipes/' + Recipe_Path()
-            }}
-          >
-        <h1>{data.data.title}</h1>
-        <p>asfd</p>
-          <h2>{Recipe_Path()}</h2>
-        </Link>
-      
-      
+        </Link>      
 
 
         <h2>Missing Ingredients</h2>

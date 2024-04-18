@@ -33,6 +33,7 @@ const USER_DOESNT_EXIST = 'User does not exist. Please try again.';
 const INVALID_CREDENTIALS = 'Invalid credentials';
 const ERROR_LOGGING_IN = 'Error logging in';
 const SUCCESSFULLY_LOGGED_IN = 'Successfully logged in';
+const SUCCESSFULLY_LOGGED_OUT = 'Successfully logged out';
 const ERROR_DURING_REGISTRATION = 'Error during registration';
 const MISSING_INGREDIENTS = 'Missing ingredients in request';
 const FAILED_TO_RETRIEVE_RECIPES = 'Failed to retrieve recipes';
@@ -76,6 +77,7 @@ module.exports = {
     TEXT_PLAIN,
     CONTENT_TYPE,
     SUCCESSFULLY_LOGGED_IN,
+    SUCCESSFULLY_LOGGED_OUT,
     ERROR_LOGGING_IN,
     NUMBER,
     INVALID_CREDENTIALS,

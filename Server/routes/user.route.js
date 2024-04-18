@@ -7,6 +7,10 @@ userRouter
     .post(UserController.login);
 
 userRouter
+    .route('/logout')
+    .post(UserController.logout);
+    
+userRouter
     .route('/register')
     .post(UserController.register);
 

@@ -1,6 +1,6 @@
 
 const { pool } = require('../db_config');
-const { USERNAME_REGEX, BAD_REQUEST, BAD_PASSWORD, BAD_USERNAME, FIND_ALL_USERS_BY_USERNAME, USERNAME_ALREADY_EXISTS, PASSWORD_REGEX, INSERT_INTO_USERS_USERNAME_AND_PASSWORD, CONFLICT, INTERNAL_SERVER_ERROR, UNEXPECTED_ERROR, REGISTRATION_SUCCESSFUL, TOKEN, USER_DOESNT_EXIST, NOT_FOUND, UNAUTHORIZED, INVALID_CREDENTIALS, NUMBER, ERROR_LOGGING_IN, CONTENT_TYPE, TEXT_PLAIN, SUCCESSFULLY_LOGGED_IN } = require('../constants');
+const { USERNAME_REGEX, OK, BAD_REQUEST, BAD_PASSWORD, BAD_USERNAME, FIND_ALL_USERS_BY_USERNAME, USERNAME_ALREADY_EXISTS, PASSWORD_REGEX, INSERT_INTO_USERS_USERNAME_AND_PASSWORD, CONFLICT, INTERNAL_SERVER_ERROR, UNEXPECTED_ERROR, REGISTRATION_SUCCESSFUL, TOKEN, USER_DOESNT_EXIST, NOT_FOUND, UNAUTHORIZED, INVALID_CREDENTIALS, NUMBER, ERROR_LOGGING_IN, CONTENT_TYPE, TEXT_PLAIN, SUCCESSFULLY_LOGGED_IN, SUCCESSFULLY_LOGGED_OUT } = require('../constants');
 const express = require('express');
 const userRouter = express.Router();
 const auth = require('../middleware/auth');
@@ -28,6 +28,16 @@ class UserController {
             res.status(INTERNAL_SERVER_ERROR).json(UNEXPECTED_ERROR);
         }
         
+        
+    }
+    async logout(req, res) {
+        try {
+            res.clearCookie(TOKEN); 
+            res.status(OK).json(SUCCESSFULLY_LOGGED_OUT);
+        } catch (err) {
+            console.error(err);
+            res.status(INTERNAL_SERVER_ERROR).json(UNEXPECTED_ERROR);
+        }
         
     }
     async register(req, res) {

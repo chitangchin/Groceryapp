@@ -38,7 +38,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { recipeDetailsDummy, nutritionDummy } from '../../../dummyData';
 
-//import NutritionWidget from '../../../Components/NutritionWidget';
+import NutritionWidget from '../../../Components/NutritionWidget';
 // import IngredientsPage from '@/app/Components/IngredientsPage.jsx';
 
 const RecipeDetailPage = () => {
@@ -125,7 +125,7 @@ const RecipeDetailPage = () => {
       {nutritionInfo && (
         <div className="bg-white py-8">
           <h2 className="text-2xl font-bold text-center mb-4">Nutritional Information</h2>
-          {/* <NutritionWidget recipeId={recipeDetails.id} /> */}
+          { <NutritionWidget recipeId={recipeDetails.id} /> }
         </div>
       )}
     </div>

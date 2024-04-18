@@ -9,12 +9,15 @@ import RecipesContext from '@/app/Context/recipeContextProvider';
 //Components
 import IngredientSearch from '../../Components/IngredientSearch';
 
+//Test Data
+import { testRecipe } from '@/app/dummyData';
 
 const Ingredients = () => {
 
   // State
   const [newUser, setNewUser] = useState(false);
   const [recipes, setRecipes] = useContext(RecipesContext);
+  const [ingredients, setIngredients] = useContext(IngredientsContext);
 
   // Variables
   const router = useRouter();
@@ -33,18 +36,27 @@ const Ingredients = () => {
       </div>
     )
   }
-
+  
   // - Database Requests
+  
+  const getRecipesAvailable = (ingredients) => {
+    //Make call to backend to get recipes availabe
+    setRecipes(testRecipe);
+  }
+
   const IngredientsRequestDB = () => {
     if (newUser) {
       IngredientsPostRequestDB();
+
     } else {
       IngredientsPutRequestDB();
     }
+    getRecipesAvailable(ingredients);
     router.push('recipes');
   }
 
   const IngredientsPostRequestDB = () => {
+    setIngredients(["apple","banana","green"])
     //*Add post request logic
   }
   const IngredientsPutRequestDB = () => {

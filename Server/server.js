@@ -17,8 +17,10 @@ const ownedRouter = require('./routes/owned.route.js'); //Imports ownedRouter
 const userRouter = require('./routes/user.route.js');
 const spoonacular = require('./routes/spoonacular.route.js');
 const ingredientRouter = require('./routes/ingredient.route.js');
+const docsRouter = require('./routes/docs.route.js');
 
 app.use('/user', userRouter);
+app.use('/docs', docsRouter);
 
 app.use(verifyUser); //Requires valid JWT to access all routes below
 

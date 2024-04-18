@@ -51,6 +51,16 @@ const ONE_USER_INGREDIENT_RETURNED = 'User ingredient returned';
 const USER_DOESNT_OWN = 'User does not own ingredient';
 const OPERATION_NOT_SUPPORTED = 'Operation not supported';
 const USER_DELETED_INGREDIENT = 'User deleted ingredient with id: ';
+const ALL_API_ROUTES = [
+    '/owned/:userId',
+    '/owned/:userId/:ingredientId',
+    '/ingredient',
+    '/user/login',
+    '/user/logout',
+    '/user/register',
+    '/api/spoonacular/recipes',
+    '/docs/api',
+];
 
 //Queries
 const FIND_ALL_USERS_BY_USERNAME = 'SELECT * FROM users WHERE username = $1';
@@ -116,4 +126,5 @@ module.exports = {
     SELECT_ONE_USER_INGREDIENT,
     DELETE_SPECIFIC_INGREDIENT,
     USER_DELETED_INGREDIENT,
+    ALL_API_ROUTES,
 };

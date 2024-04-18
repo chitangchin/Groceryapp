@@ -17,10 +17,13 @@ pool.connect()
 const ownedRouter = require('./routes/ownedRouter'); //Imports ownedRouter
 const userRouter = require('./routes/user.route.js');
 const spoonacular = require('./routes/spoonacular.route.js');
-
 app.use('/owned', ownedRouter); //Server refers to ownedRouter for all api calls to /owned
 app.use('/user', userRouter);
 app.use('/api', spoonacular);
+//testing route
+app.use('/test', (req, res) => {
+    res.send('Grocery app deployed!');
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

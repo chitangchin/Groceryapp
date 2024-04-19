@@ -1,7 +1,7 @@
 "use client";
 import { useContext} from 'react';
 import RecipesContext from '../../Context/recipeContextProvider.js'
-import recipeCards from '@/app/Components/recipeCards.js';
+import recipeCards from '@/app/_components/recipeCards.js';
 
 // get array of ids
 // Pass recipe info to recipe card

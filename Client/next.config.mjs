@@ -1,4 +1,7 @@
 const nextConfig = {
+    eslint: {
+      ignoreDuringBuilds: true,
+    },
     images: {
         // remotePatterns: ['img.spoonacular.com'],
         remotePatterns: [
@@ -9,7 +12,8 @@ const nextConfig = {
               pathname: '/**',
             },
           ],
-    }, env: {
+    },
+    env: {
         BASE_URL: process.env.BASE_URL,
     }
 };

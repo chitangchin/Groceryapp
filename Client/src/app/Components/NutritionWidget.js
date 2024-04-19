@@ -2,8 +2,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
-import axios from 'axios';
-
 
 const NutritionWidget = ({ recipeId }) => {
   const [nutritionData, setNutritionData] = useState(null);

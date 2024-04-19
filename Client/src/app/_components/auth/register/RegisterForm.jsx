@@ -119,6 +119,7 @@ export const RegisterForm = () => {
                           className="text-black w-full px-4 py-2 pl-8 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                       />
                       {error === 'Must be 4-16 alphanumeric' && <p className="text-red-500 ml-1 mt-1 text-xs">{error}</p>}
+
                     </div>
                      <div className="relative">
                       <MdOutlineAlternateEmail  className="absolute inset-2 left-2 

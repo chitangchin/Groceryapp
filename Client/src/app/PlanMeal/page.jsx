@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
-import BottomMenu from '../components/BottomMenu';
-import ToggleAddMeal from "../components/ToggleAddMeal";
+import BottomMenu from '../_components/BottomMenu';
+import ToggleAddMeal from "../_components/ToggleAddMeal";
 
 export default function PlanMeal() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

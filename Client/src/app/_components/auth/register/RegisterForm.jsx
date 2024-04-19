@@ -13,7 +13,7 @@ export const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [error, setError] = useRef(false);
+  const [error, setError] = useState(false);
 
   function handleSignUp() {
       console.log('Signing up with:', username, email, password, repeatPassword);

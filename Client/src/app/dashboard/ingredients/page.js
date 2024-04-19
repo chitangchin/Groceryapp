@@ -6,7 +6,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import IngredientsContext from '@/app/Context/ingredientsContext';
 
 //Components
-import IngredientsBox from '@/app/Components/ingredientsBox'; //WORK IN PROGRESS
+import IngredientsBox from '@/app/_components/ingredientsBox'; //WORK IN PROGRESS
 
 const Ingredients = () => {
 

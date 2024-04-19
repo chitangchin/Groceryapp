@@ -9,7 +9,7 @@ import LoggedInContext from '../Context/loggedInContext.js';
 import IngredientsContext from '../Context/ingredientsContext.js';
 
 // Components
-import RecipeCards from '@/app/Components/recipeCards.js';
+import RecipeCards from '@/app/_components/recipeCards.js';
 
 // Test
 import { testRecipe } from '../dummyData.js';

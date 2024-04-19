@@ -1,0 +1,170 @@
+{
+    "owned": {
+        "/owned/:userId": {
+            "requiresAuth": true,
+            "operations": {
+                "GET": {
+                    "description": "Fetches all ingredients owned by the user passed in the route parameter",
+                    "req.body": "N/A",
+                    "returns": [{"ingredientId": 10016049, "name": "cannellini beans"},{"ingredientId": 93604,"name": "curry leaves"}, "..."]
+                },
+                "POST": {
+                    "description": "Adds ingredientId's from req.body to the users owned list",
+                    "req.body": {"ingredientId": [10016049,437,633,"..."]},
+                    "returns": "{ingredientId.length} ingredients added to your list"
+                },
+                "DELETE": {
+                    "description": "Deletes all ingredients owned from users list",
+                    "req.body": "N/A",
+                    "returns": "All users ingredients deleted"
+                }
+            }
+        },
+        "/owned/:userId/:ingredientId": {
+            "requiresAuth": true,
+            "operations": {
+                "GET": {
+                    "description": "Fetches selected ingredient owned by the user",
+                    "req.body": "N/A",
+                    "returns": [{"ingredientId": 10016049, "name": "cannellini beans"}]
+                },
+                
+                "DELETE": {
+                    "description": "Deletes all ingredients owned from users list",
+                    "req.body": "N/A",
+                    "returns": "All users ingredients deleted"
+                }
+            }
+        }
+    },
+    "user": {
+        "/user/login": {
+            "requiresAuth": false,
+            "operations": {
+                "POST": {
+                    "description": "Logs user into app and creates cookie with the JWT",
+                    "req.body": {"username": "fakeuser", "password": "password123"},
+                    "returns": "Successfully logged in"
+                }
+            }
+        },
+        "/user/logout": {
+            "requiresAuth": false,
+            "operations": {
+                "GET": {
+                    "description": "Logs user out and deletes cookie containing the JWT",
+                    "req.body": "N/A",
+                    "returns": "Successfully logged out"
+                }
+            }
+        },
+        "/user/register": {
+            "requiresAuth": false,
+            "operations": {
+                "POST": {
+                    "description": "Registers user account and creates cookie with the JWT",
+                    "req.body": {"username": "fakeuser", "password": "password123"},
+                    "returns": "Registration Successful!"
+                }
+            }
+        }
+    },
+    "api": {
+        "/api/spoonacular/recipes": {
+            "requiresAuth": true,
+            "operations": {
+                "POST": {
+                    "description": "Calls spoonacular API and returns x amount of recipes based on ingredients owned",
+                    "req.body": {"ingredients": ["apple", "banana", "..."], "number": 10},
+                    "returns": [{
+                        "id": 665469,
+                        "title": "Xocai Healthy Chocolate Peanut Butter Bannana Dip",
+                        "image": "https://img.spoonacular.com/recipes/665469-312x231.jpg",
+                        "imageType": "jpg",
+                        "usedIngredientCount": 1,
+                        "missedIngredientCount": 2,
+                        "missedIngredients": [
+                            {
+                                "id": 19081,
+                                "amount": 1,
+                                "unit": "",
+                                "unitLong": "",
+                                "unitShort": "",
+                                "aisle": "Sweet Snacks",
+                                "name": "chocolate",
+                                "original": "1 chunk Chocolate (Xocai Nugget)",
+                                "originalName": "Chocolate (Xocai Nugget)",
+                                "meta": [
+                                    "chunk",
+                                    "(Xocai Nugget)"
+                                ],
+                                "image": "https://img.spoonacular.com/ingredients_100x100/milk-chocolate.jpg"
+                            },
+                            {
+                                "id": 16098,
+                                "amount": 1,
+                                "unit": "tbsp",
+                                "unitLong": "tablespoon",
+                                "unitShort": "Tbsp",
+                                "aisle": "Nut butters, Jams, and Honey",
+                                "name": "peanut butter",
+                                "original": "1 tbsp Peanut Butter (Natural Peanut Butter)",
+                                "originalName": "Peanut Butter (Natural Peanut Butter)",
+                                "meta": [
+                                    "(Natural Peanut Butter)"
+                                ],
+                                "image": "https://img.spoonacular.com/ingredients_100x100/peanut-butter.png"
+                            }
+                        ],
+                        "usedIngredients": [
+                            {
+                                "id": 9040,
+                                "amount": 1,
+                                "unit": "",
+                                "unitLong": "",
+                                "unitShort": "",
+                                "aisle": "Produce",
+                                "name": "stem bananas",
+                                "original": "1 stem Bananas (Banana, peeled)",
+                                "originalName": "stem Bananas (Banana, peeled)",
+                                "meta": [
+                                    "peeled",
+                                    "(Banana, )"
+                                ],
+                                "image": "https://img.spoonacular.com/ingredients_100x100/bananas.jpg"
+                            }
+                        ],
+                        "unusedIngredients": [
+                            {
+                            "id": 9003,
+                            "amount": 1,
+                            "unit": "serving",
+                            "unitLong": "serving",
+                            "unitShort": "serving",
+                            "aisle": "Produce",
+                            "name": "apple",
+                            "original": "apple",
+                            "originalName": "apple",
+                            "meta": [],
+                            "image": "https://img.spoonacular.com/ingredients_100x100/apple.jpg"
+                            }
+                        ],
+                        "likes": 1
+                    }]
+                }
+            }
+        }
+    },
+    "ingredient": {
+        "/ingredient": {
+            "requiresAuth": true,
+            "operations": {
+                "GET": {
+                    "description": "Fetches all ingredients from the ingredients table",
+                    "req.body": "N/A",
+                    "returns": [{"ingredient_id": 10016049, "name": "cannellini beans"},{"id": 93604,"name": "curry leaves"}]
+                }
+            }
+        }
+    }
+}

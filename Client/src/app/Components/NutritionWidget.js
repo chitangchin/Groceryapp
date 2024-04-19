@@ -1,9 +1,13 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
 
+import Image from 'next/image';
+import axios from 'axios';
+
 
 const NutritionWidget = ({ recipeId }) => {
   const [nutritionData, setNutritionData] = useState(null);
+  const [nutritionImage, setNutritionImage] = useState(null);
   //  const apiKey = "ae9fab0183fd48e9b6af4a983da4897f";
   const apiKey = "4ea43c3d4d094e73bd1279ff484b7acf";
     // const apiKey = "ae9fab0183fd48e9b6af4a983da4897f";
@@ -33,7 +37,26 @@ const NutritionWidget = ({ recipeId }) => {
       }
     };
 
+    const fetchNutritionImage = async () => {
+      try {
+        // const response = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/nutritionLabel.png?apiKey=${apiKey}`);
+        const response = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/nutritionLabel.png?apiKey=${apiKey}`);
+        console.log("ressss", response);
+        if (response) {
+          // console.log("response data", response.data);
+          setNutritionImage(response.data);
+        } else {
+          console.error("Can't get good image", error);
+        }
+      } catch (error) {
+        console.error('Error fetching nutrition image:', error);
+      }
+    };
+
+
+
     fetchNutritionInfo();
+    fetchNutritionImage();
   }, [recipeId, apiKey]);
 
   return (
@@ -159,6 +182,12 @@ const NutritionWidget = ({ recipeId }) => {
                   <div>The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
               </div>
           </div>
+        </div>
+      )}
+
+      {nutritionImage && (
+        <div>
+          <Image src={`data:image/png;base64,${nutritionImage}`} alt="nutrition Image" width={500} height={500}/>
         </div>
       )}
 

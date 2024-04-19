@@ -83,23 +83,19 @@ const NutritionWidget = ({ recipeId }) => {
                   <div>
                       <span className="font-bold">Total Fat</span> {Math.floor(nutritionData[1].amount)}{nutritionData[1].unit}
                   </div>
-                  <div className="font-bold">10%</div>
+                  <div className="font-bold">{Math.floor(nutritionData[1].percentOfDailyNeeds)}%</div>
               </div>
               <hr className="border-gray-500"/>
               <div className="flex justify-between">
-                  <div>Saturated Fat 1g</div>
-                  <div className="font-bold">5%</div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div>
-                  <span className="italic">Trans Fat</span> 8g
+                  <div>Saturated Fat {Math.floor(nutritionData[2].amount)}{nutritionData[2].unit}</div>
+                  <div className="font-bold">{Math.floor(nutritionData[2].percentOfDailyNeeds)}%</div>
               </div>
               <hr className="border-gray-500"/>
               <div className="flex justify-between">
                   <div>
-                      <span className="font-bold">Cholesterol</span> 0mg
+                      <span className="font-bold">Cholesterol</span> {Math.floor(nutritionData[6].amount)}{nutritionData[6].unit}
                   </div>
-                  <div className="font-bold">0%</div>
+                  <div className="font-bold">{Math.floor(nutritionData[6].percentOfDailyNeeds)}%</div>
               </div>
               <hr className="border-gray-500"/>
               <div className="flex justify-between">

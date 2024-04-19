@@ -40,14 +40,22 @@ const NutritionWidget = ({ recipeId }) => {
     const fetchNutritionImage = async () => {
       try {
         // const response = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/nutritionLabel.png?apiKey=${apiKey}`);
-        const response = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/nutritionLabel.png?apiKey=${apiKey}`);
-        console.log("ressss", response);
-        if (response) {
-          // console.log("response data", response.data);
-          setNutritionImage(response.data);
-        } else {
-          console.error("Can't get good image", error);
+        // const response = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/nutritionLabel.png?apiKey=${apiKey}`);
+        const response = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/nutritionLabel.png?apiKey=${apiKey}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'image/png'
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch image');
         }
+
+        const blob = await response.blob();
+        const imageURL = URL.createObjectURL(blob);
+        setNutritionImage(imageURL);
+
       } catch (error) {
         console.error('Error fetching nutrition image:', error);
       }
@@ -85,109 +93,9 @@ const NutritionWidget = ({ recipeId }) => {
         </div>
       </div>
 
-      {nutritionData && (
-        <div className="p-1 border-2 border-black font-sans w-72">
-          <div className="text-4xl font-extrabold leading-none">Nutrition Facts</div>
-          <div className="leading-snug">8 servings per container</div>
-          <div className="flex justify-between font-bold border-b-8 border-black">
-              <div>Serving size</div><div>2/3 cup (55g)</div>
-          </div>
-          <div className="flex justify-between items-end font-extrabold">
-              <div>
-                  <div className="font-bold">Amount per serving</div>
-                  <div className="text-4xl">Calories</div>
-              </div>
-                <div className="text-5xl">{Math.floor( nutritionData[0].amount )}</div>
-          </div>
-          <div className="border-t-4 border-black text-sm pb-1">
-              <div className="text-right font-bold pt-1 pb-1">% Daily value*</div>
-              <hr className="border-gray-500"/>
-              <div className="flex justify-between">
-                  <div>
-                      <span className="font-bold">Total Fat</span> {Math.floor(nutritionData[1].amount)}{nutritionData[1].unit}
-                  </div>
-                  <div className="font-bold">{Math.floor(nutritionData[1].percentOfDailyNeeds)}%</div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div className="flex justify-between">
-                  <div>Saturated Fat {Math.floor(nutritionData[2].amount)}{nutritionData[2].unit}</div>
-                  <div className="font-bold">{Math.floor(nutritionData[2].percentOfDailyNeeds)}%</div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div className="flex justify-between">
-                  <div>
-                      <span className="font-bold">Cholesterol</span> {Math.floor(nutritionData[6].amount)}{nutritionData[6].unit}
-                  </div>
-                  <div className="font-bold">{Math.floor(nutritionData[6].percentOfDailyNeeds)}%</div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div className="flex justify-between">
-                  <div>
-                      <span className="font-bold">Sodium</span> 160mg
-                  </div>
-                  <div className="font-bold">7%</div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div className="flex justify-between">
-                  <div>
-                      <span className="font-bold">Total Carbohydrate</span> 37g
-                  </div>
-                  <div className="font-bold">13%</div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div className="flex justify-between">
-                  <div className="pl-4">
-                      Dietary Fiber 4g
-                  </div>
-                  <div className="font-bold">14%</div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div className="pl-4">
-                  Total Sugar 12g
-                  <div className="pl-4">
-                      <hr className="border-gray-500"/>
-                      <div className="flex justify-between">
-                          <div>Includes 10g Added Sugars</div>
-                          <div className="font-bold">20%</div>
-                      </div>
-                  </div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div>
-                  <span className="font-bold">Protein</span> 3g
-              </div>
-          </div>
-          <div className="border-t-8 border-black pt-1 text-sm">
-              <div className="flex justify-between">
-                  <div>Vitamin D 2mcg</div>
-                  <div>10%</div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div className="flex justify-between">
-                  <div>Calcium 260mg</div>
-                  <div>20%</div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div className="flex justify-between">
-                  <div>Iron 8mg</div>
-                  <div>45%</div>
-              </div>
-              <hr className="border-gray-500"/>
-              <div className="flex justify-between">
-                  <div>Potassium 240mg</div>
-                  <div>6%</div>
-              </div>
-              <div className="border-t-4 border-black flex leading-none text-xs pt-2 pb-1">
-                  <div className="pr-1">*</div>
-                  <div>The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
-              </div>
-          </div>
-        </div>
-      )}
-
       {nutritionImage && (
         <div>
-          <Image src={`data:image/png;base64,${nutritionImage}`} alt="nutrition Image" width={500} height={500}/>
+          <Image src={nutritionImage} alt="nutrition Image" width={500} height={500}/>
         </div>
       )}
 

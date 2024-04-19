@@ -60,6 +60,7 @@ const ALL_API_ROUTES = [
     '/user/register',
     '/api/spoonacular/recipes',
     '/docs/api',
+    '/docs/api/{owned}/{ingredient}/{user}/{api} 1 <= {optionalParams}.count() <= 4',
 ];
 
 //Queries

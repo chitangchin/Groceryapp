@@ -9,7 +9,8 @@
     "startServer": "cd ./Server && npm run start",
     "dev": "concurrently \"npm run startClient\" \"npm run startServer\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd ./Client && npm run build"
+    "build": "cd ./Client && npm run build",
+    "vercel-build": "echo hello"
   },
   "author": "",
   "license": "ISC",

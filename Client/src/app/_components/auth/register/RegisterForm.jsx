@@ -14,42 +14,25 @@ export const RegisterForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  function handleSignUp() {
-      console.log('Signing up with:', username, email, password, repeatPassword);
-      router.push('/login');
-  }
-
-  const validateUserInput = () => {
-    const USERNAME_REGEX = /^[0-9A-Za-z]{4,16}$/;
-    const PASSWORD_REGEX = /^(?=.*?[0-9])(?=.*?[A-Za-z]).{8,32}$/;
-    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!username || !email || !password || !repeatPassword) {
-      setError('Please fill in all fields');
-      return false;
-    }
-    if (!USERNAME_REGEX.test(username)) {
-      setError('Invalid username');
-      return false;
-    }
-    if (!PASSWORD_REGEX.test(password)) {
-      setError('Invalid password');
-      return false;
-    }
-    if (!EMAIL_REGEX.test(email)) {
-      setError('Invalid email');
-      return false;
-    }
-    if (password !== repeatPassword) {
-      setError('Passwords do not match');
-      return false;
-    }
-    return true;
-  }
   const handleSubmit = async (event) => {
     event.preventDefault();
-    validateUserInput();
+    if(!email || !password || !username){
+      setError('Please fill in all fields');
+      return;
+    }
+    //simulate loading
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      console.log("submitted")
+    }, 4000);
+    if(error){
+      return;
+    }
+
+    
     // try {
     //   const response = await fetch('/api/login', {
     //     method: 'POST',
@@ -106,10 +89,20 @@ export const RegisterForm = () => {
     setPassword(passwordInput);
   }
   
+  console.log("error" + error);
+  const handleRepeatPasswordChange = (event) => {
+    const repeatPasswordInput = event.target.value;
+    if (repeatPasswordInput !== password) {
+      setError('Passwords do not match');
+    } else {
+      setError('');
+    }
+    setRepeatPassword(repeatPasswordInput);
+  }
   return (
     <div>
       <div className="grid grid-cols-10 grid-rows-10 gap-4 h-screen bg-black bg-opacity-25">
-                <form onSubmit={(event) => handleSubmit(event)} className="col-start-2 col-span-3 row-start-3 row-span-6  text-xs shadow-black shadow-2xl bg-white rounded-lg p-8 opacity-85">
+                <form noValidate onSubmit={(event) => handleSubmit(event)} className="col-start-2 col-span-3 row-start-3 row-span-6  text-xs shadow-black shadow-2xl bg-white rounded-lg p-8 opacity-85">
                     <h2 className="text-2xl text-black text-center font-bold ">Create Account</h2>
                     <div className=" space-y-5 flex-col justify-center items-center mt-4">
                     <div className="relative">
@@ -153,7 +146,7 @@ export const RegisterForm = () => {
                           onChange={(e) => handlePasswordChange(e)}
                           className="text-black w-full px-4 py-2 pl-8 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                       />
-                       {error === 'Invalid password' && <p className="text-red-500 ml-1 mt-1">{error}</p>}
+                       {error === 'Must be 8-32 alphanumeric' && <p className="text-red-500 ml-1 mt-1">{error}</p>}
                     </div>
                     <div className="relative">
                       <RiLockPasswordFill className="absolute inset-2 left-2
@@ -164,21 +157,23 @@ export const RegisterForm = () => {
                           placeholder="Repeat Password"
                           value={repeatPassword}
                           required
-                          onChange={(e) => setRepeatPassword(e.target.value)}
+                          onChange={(e) => handleRepeatPasswordChange(e)}
                           className="text-black w-full px-4 py-2 pl-8 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                       />
                        {error === 'Passwords do not match' && <p className="text-red-500 ml-1 mt-1">{error}</p>}
+                       {error === 'Please fill in all fields' && <p className="text-red-500 ml-1 mt-1">{error}</p>}
                     </div>     
                         
                       <div className="flex items-center justify-between ml-1">
-                       <div>
+                       <div className="flex items-center">
                        <input
+                          id="acceptTerms"
                             type="checkbox"
                             checked={acceptTerms}
                             onChange={(e) => setAcceptTerms(e.target.checked)}
                             className="w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                         />
-                        <label className="text-gray-500  ml-3">
+                        <label htmlFor="acceptTerms" className="text-gray-500  ml-3">
                             I accept Terms and Conditions
                         </label>
                        </div>
@@ -190,20 +185,20 @@ export const RegisterForm = () => {
                         </div>
                         <button
                             type="submit"
-                            className="w-full px-4 py-2 text-white bg-[#f55a3e] rounded-md disabled:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-orange-800 focus:outline-none focus:bg-orange-800"
-                            disabled={!acceptTerms || error} 
+                            className="flex items-center justify-center w-full px-4 py-2 text-white bg-[#f55a3e] rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed hover:bg-orange-800 focus:outline-none focus:bg-orange-800"
+                            disabled={!acceptTerms || error || isLoading} 
                         >
-                            Register
+                         {isLoading ? (
+                        <>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mr-4 " viewBox="0 0 24 24" ><rect width={9} height={9} x={1.5} y={1.5} fill="currentColor" rx={1}><animate id="svgSpinnersBlocksScale0" attributeName="x" begin="0;svgSpinnersBlocksScale1.end+0.225s" dur="0.9s" keyTimes="0;.2;1" values="1.5;.5;1.5"></animate><animate attributeName="y" begin="0;svgSpinnersBlocksScale1.end+0.225s" dur="0.9s" keyTimes="0;.2;1" values="1.5;.5;1.5"></animate><animate attributeName="width" begin="0;svgSpinnersBlocksScale1.end+0.225s" dur="0.9s" keyTimes="0;.2;1" values="9;11;9"></animate><animate attributeName="height" begin="0;svgSpinnersBlocksScale1.end+0.225s" dur="0.9s" keyTimes="0;.2;1" values="9;11;9"></animate></rect><rect width={9} height={9} x={13.5} y={1.5} fill="currentColor" rx={1}><animate attributeName="x" begin="svgSpinnersBlocksScale0.begin+0.225s" dur="0.9s" keyTimes="0;.2;1" values="13.5;12.5;13.5"></animate><animate attributeName="y" begin="svgSpinnersBlocksScale0.begin+0.225s" dur="0.9s" keyTimes="0;.2;1" values="1.5;.5;1.5"></animate><animate attributeName="width" begin="svgSpinnersBlocksScale0.begin+0.225s" dur="0.9s" keyTimes="0;.2;1" values="9;11;9"></animate><animate attributeName="height" begin="svgSpinnersBlocksScale0.begin+0.225s" dur="0.9s" keyTimes="0;.2;1" values="9;11;9"></animate></rect><rect width={9} height={9} x={13.5} y={13.5} fill="currentColor" rx={1}><animate attributeName="x" begin="svgSpinnersBlocksScale0.begin+0.45s" dur="0.9s" keyTimes="0;.2;1" values="13.5;12.5;13.5"></animate><animate attributeName="y" begin="svgSpinnersBlocksScale0.begin+0.45s" dur="0.9s" keyTimes="0;.2;1" values="13.5;12.5;13.5"></animate><animate attributeName="width" begin="svgSpinnersBlocksScale0.begin+0.45s" dur="0.9s" keyTimes="0;.2;1" values="9;11;9"></animate><animate attributeName="height" begin="svgSpinnersBlocksScale0.begin+0.45s" dur="0.9s" keyTimes="0;.2;1" values="9;11;9"></animate></rect><rect width={9} height={9} x={1.5} y={13.5} fill="currentColor" rx={1}><animate id="svgSpinnersBlocksScale1" attributeName="x" begin="svgSpinnersBlocksScale0.begin+0.675s" dur="0.9s" keyTimes="0;.2;1" values="1.5;.5;1.5"></animate><animate attributeName="y" begin="svgSpinnersBlocksScale0.begin+0.675s" dur="0.9s" keyTimes="0;.2;1" values="13.5;12.5;13.5"></animate><animate attributeName="width" begin="svgSpinnersBlocksScale0.begin+0.675s" dur="0.9s" keyTimes="0;.2;1" values="9;11;9"></animate><animate attributeName="height" begin="svgSpinnersBlocksScale0.begin+0.675s" dur="0.9s" keyTimes="0;.2;1" values="9;11;9"></animate></rect></svg>
+                              <p className="text-white text-sm ">Processing...</p>
+                            </>
+                          ) : (
+                            <p className="text-white text-sm">Register</p>
+                          )}
                         </button>
                         </div>
-                      {/* //TODO: Add error message
-                      //TODO: Add success message
-                      //TODO: Add loading indicator
-                      //TODO: Add password visibility toggle
-                      //TODO: Add repeat password visibility toggle
-                    //TODO: Add validation for email and password */}
-
-                </form>
+                        </form>
                     <div className="col-start-5 col-span-5 row-start-3 row-span-6 ">
                       <div className="flex items-center justify-center h-full p-4">
                         <CreateAccountInfo/>
@@ -215,4 +210,5 @@ export const RegisterForm = () => {
     
   )
 }
+
 

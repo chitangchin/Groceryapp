@@ -4,6 +4,10 @@ import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { CreateAccountInfo } from "./CreateAccountInfo";
 import { MdOutlineAlternateEmail } from "react-icons/md";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+library.add(faEye, faEyeSlash)
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 export const RegisterForm = () => {
   const router = useRouter();
@@ -15,6 +19,7 @@ export const RegisterForm = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -102,7 +107,7 @@ export const RegisterForm = () => {
   return (
     <div>
       <div className="grid grid-cols-10 grid-rows-10 gap-4 h-screen bg-black bg-opacity-25">
-                <form noValidate onSubmit={(event) => handleSubmit(event)} className="col-start-2 col-span-3 row-start-3 row-span-6  text-xs shadow-black shadow-2xl bg-white rounded-lg p-8 opacity-85">
+                <form noValidate onSubmit={(event) => handleSubmit(event)} className="col-start-2 col-span-3 row-start-3 row-span-6  text-xs shadow-black shadow-2xl bg-white rounded-lg p-6 opacity-85">
                     <h2 className="text-2xl text-black text-center font-bold ">Create Account</h2>
                     <div className=" space-y-5 flex-col justify-center items-center mt-4">
                     <div className="relative">
@@ -141,30 +146,39 @@ export const RegisterForm = () => {
                       flex items-center  
                       text-base text-gray-500 " />
                       <input
-                          type="password"
+                          type={showPassword ? "text" : "password"}
                           placeholder="Password"
                           value={password}
                           onChange={(e) => handlePasswordChange(e)}
                           className="text-black w-full px-4 py-2 pl-8 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                      >
+                      </input>
+                      <FontAwesomeIcon className="absolute right-2 top-1/2 transform -translate-y-1/2 opacity-80 "
+                        icon={showPassword ? "eye-slash" : "eye"}
+                        onClick={() => setShowPassword(!showPassword)}
                       />
-                       {error === 'Must be 8-32 alphanumeric' && <p className="text-red-500 ml-1 mt-1">{error}</p>}
                     </div>
+                    {error === 'Must be 8-32 alphanumeric' && <span className="text-red-500 ">{error}</span>}
                     <div className="relative">
                       <RiLockPasswordFill className="absolute inset-2 left-2
                       flex items-center  
                       text-base text-gray-500 " />
                       <input
-                          type="password"
+                          id="repeatPassword"
+                          type={showPassword ? "text" : "password"}
                           placeholder="Repeat Password"
                           value={repeatPassword}
                           required
                           onChange={(e) => handleRepeatPasswordChange(e)}
                           className="text-black w-full px-4 py-2 pl-8 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                       />
-                       {error === 'Passwords do not match' && <p className="text-red-500 ml-1 mt-1">{error}</p>}
-                       {error === 'Please fill in all fields' && <p className="text-red-500 ml-1 mt-1">{error}</p>}
+                      <FontAwesomeIcon className="absolute right-2 top-1/2 transform -translate-y-1/2 opacity-80"
+                        icon={showPassword ? "eye-slash" : "eye"}
+                        onClick={() => setShowPassword(!showPassword)}
+                      />
                     </div>     
-                        
+                       {error === 'Passwords do not match' && <span className="text-red-500 ml-1 mt-1">{error}</span>}
+                       {error === 'Please fill in all fields' && <span className="text-red-500 ml-1 mt-1">{error}</span>}
                       <div className="flex items-center justify-between ml-1">
                        <div className="flex items-center">
                        <input

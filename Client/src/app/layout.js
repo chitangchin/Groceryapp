@@ -4,6 +4,10 @@ import { RecipesProvider } from "./Context/recipeContextProvider";
 import { IngredientsProvider } from "./Context/ingredientsContext";
 import { UsernameProvider } from "./Context/userContext"
 import { LoggedInProvider } from "./Context/loggedInContext";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
 
 const inter = Inter({ subsets: ["latin"] });
 

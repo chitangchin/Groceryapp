@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
-
 const NutritionWidget = ({ recipeId }) => {
   const [nutritionData, setNutritionData] = useState(null);
   const [nutritionImage, setNutritionImage] = useState(null);
@@ -62,13 +61,14 @@ const NutritionWidget = ({ recipeId }) => {
 
 
 
-    fetchNutritionInfo();
+    // fetchNutritionInfo();
     fetchNutritionImage();
   }, [recipeId, apiKey]);
 
   return (
     <div>
-      <div className="w-full max-w-md mx-auto">
+
+{/*       <div className="w-full max-w-md mx-auto">
         <h3 className="text-lg font-semibold text-center mb-4">Nutritional Information</h3>
         <div className="overflow-x-auto">
           <table className="border-collapse border border-gray-300 rounded-lg overflow-hidden">
@@ -90,7 +90,8 @@ const NutritionWidget = ({ recipeId }) => {
             </tbody>
           </table>
         </div>
-      </div>
+      </div> */}
+
 
       {nutritionImage && (
         <div>

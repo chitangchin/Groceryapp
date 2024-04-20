@@ -106,6 +106,10 @@ export const RegisterForm = () => {
     setPassword(passwordInput);
   }
 
+  const userCheckAndPost = () => {
+    router.push("/dashboard/ingredients")
+  }
+
   
   return (
     <div>
@@ -194,6 +198,7 @@ export const RegisterForm = () => {
                             type="submit"
                             className="w-full px-4 py-2 text-white bg-[#f55a3e] rounded-md disabled:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-orange-800 focus:outline-none focus:bg-orange-800"
                             disabled={!acceptTerms || error} 
+                            onClick={userCheckAndPost}
                         >
                             Register
                         </button>

@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <main>
       Home Page
-      <Link href="/login">login</Link>
+      <Link href="/api/auth/login">login</Link>
     </main>
   );
 }

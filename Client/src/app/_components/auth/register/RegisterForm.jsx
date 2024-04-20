@@ -47,7 +47,7 @@ export const RegisterForm = () => {
 
     try{
 
-      const response = await fetch("http://localhost:8080/user/register", {
+      const response = await fetch("https://groceryapp-backend-fqdms9kor-chitangchins-projects.vercel.app/user/register", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password, email }),

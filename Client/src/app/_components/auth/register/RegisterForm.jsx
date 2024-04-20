@@ -9,6 +9,9 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 library.add(faEye, faEyeSlash)
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+const logger = require('pino')()
+
+const register = process.env.REGISTER_USER_API
 export const RegisterForm = () => {
   const router = useRouter();
 
@@ -20,48 +23,58 @@ export const RegisterForm = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
+  const [data, setData] = useState();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if(!email || !password || !username){
       setError('Please fill in all fields');
+      logger.error('Please fill in all fields');
       return;
     }
-    //simulate loading
+
+    //? simulate loading
     setIsLoading(true);
-    setTimeout(() => {
+    await setTimeout( () => {
       setIsLoading(false);
-      console.log("submitted")
     }, 4000);
     if(error){
+      logger.error(error);
       return;
     }
 
+    logger.info('Registering user: ' + username + ' with email: ' + email + ' with password: ' + password);
+
+    try{
+
+      const response = await fetch("http://localhost:8080/user/register", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password, email }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        if (response.status === 409) {
+          setError(data.message);
+        } else {
+          setError('Registration failed. Please try again');
+        }
+        return;
+      }
+      logger.info('Login successful:', data)
+      router.push('/dashboard');
+    } catch (error) {
+      logger.error(error);
+    } 
+    finally{
+      // setIsLoading(false);
+    }
     
-    // try {
-    //   const response = await fetch('/api/login', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ email, password }),
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error('Login failed');
-    //   }
-
-    //   const data = await response.json();
-    //   console.log('Login successful:', data);
-
-    //   router.push('/dashboard');
-    // } catch (error) {
-    //   setError('Invalid email or password');
-    // }
   };
 
   const handleUsernameChange = (event) => {
     const usernameInput = event.target.value;
     const USERNAME_REGEX = /^[0-9A-Za-z]{4,16}$/;
-    console.log("usernameInput" + ' ' + USERNAME_REGEX.test(usernameInput));
     if (!USERNAME_REGEX.test(usernameInput)) {
       setError('Must be 4-16 alphanumeric');
     } else {
@@ -74,7 +87,6 @@ export const RegisterForm = () => {
     const emailInput = event.target.value;
     const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
-    console.log("emailInput" + ' ' + EMAIL_REGEX.test(emailInput));
     if (!EMAIL_REGEX.test(emailInput)) {
       setError('Please enter a valid email address');
     } else {
@@ -94,7 +106,6 @@ export const RegisterForm = () => {
     setPassword(passwordInput);
   }
   
-  console.log("error" + error);
   const handleRepeatPasswordChange = (event) => {
     const repeatPasswordInput = event.target.value;
     if (repeatPasswordInput !== password) {
@@ -107,7 +118,7 @@ export const RegisterForm = () => {
   return (
     <div>
       <div className="grid grid-cols-10 grid-rows-10 gap-4 h-screen bg-black bg-opacity-25">
-                <form noValidate onSubmit={(event) => handleSubmit(event)} className="col-start-2 col-span-3 row-start-3 row-span-6  text-xs shadow-black shadow-2xl bg-white rounded-lg p-6 opacity-85">
+                <form noValidate onSubmit={(e) => handleSubmit(e)} className="col-start-2 col-span-3 row-start-3 row-span-6  text-xs shadow-black shadow-2xl bg-white rounded-lg p-6 opacity-85">
                     <h2 className="text-2xl text-black text-center font-bold ">Create Account</h2>
                     <div className=" space-y-5 flex-col justify-center items-center mt-4">
                     <div className="relative">
@@ -177,8 +188,10 @@ export const RegisterForm = () => {
                         onClick={() => setShowPassword(!showPassword)}
                       />
                     </div>     
-                       {error === 'Passwords do not match' && <span className="text-red-500 ml-1 mt-1">{error}</span>}
+                       <span className="mt-1">{error === 'Passwords do not match' && <span className="text-red-500 ml-1 mt-1">{error}</span>}
                        {error === 'Please fill in all fields' && <span className="text-red-500 ml-1 mt-1">{error}</span>}
+                       {error === 'Username already exists' && <span className="text-red-500 ml-1 mt-1">{error}</span>}
+                       </span>
                       <div className="flex items-center justify-between ml-1">
                        <div className="flex items-center">
                        <input

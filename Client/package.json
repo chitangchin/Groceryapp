@@ -15,6 +15,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "chart.js": "^4.4.2",
     "next": "^14.2.2",
+    "pino": "^8.20.0",
     "react": "^18",
     "react-dom": "^18",
     "react-fontawesome": "^1.7.1",

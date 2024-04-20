@@ -25,11 +25,11 @@ const BAD_USERNAME =
     'Username must be alphanumeric and between 4 and 16 characters long';
 const BAD_PASSWORD =
     'Password must be alphanumeric and between 8 and 32 characters long';
-const USERNAME_ALREADY_EXISTS = 'Username already exists, please try again';
+const USERNAME_ALREADY_EXISTS = 'Username already exists';
 const REGISTRATION_SUCCESSFUL = 'Registration Successful!';
 const UNEXPECTED_ERROR =
-    'An unexpected error occurred. Please try again later.';
-const USER_DOESNT_EXIST = 'User does not exist. Please try again.';
+    'An unexpected error occurred.';
+const USER_DOESNT_EXIST = 'User does not exist.';
 const INVALID_CREDENTIALS = 'Invalid credentials';
 const ERROR_LOGGING_IN = 'Error logging in';
 const SUCCESSFULLY_LOGGED_IN = 'Successfully logged in';

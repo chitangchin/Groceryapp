@@ -4,23 +4,25 @@ import { useSearchParams, useRouter } from 'next/navigation'
 
 //Context
 import IngredientsContext from '@/app/Context/ingredientsContext';
+import RecipesContext from '@/app/Context/recipeContextProvider';
 
 //Components
-import IngredientsBox from '@/app/_components/ingredientsBox'; //WORK IN PROGRESS
+import IngredientSearch from '../../Components/IngredientSearch';
+
+//Test Data
+import { testRecipe } from '@/app/dummyData';
 
 const Ingredients = () => {
 
   // State
-  const [ingredients, setIngredients] = useContext(IngredientsContext);
-  const [edit, setEdit] = useState(false);
   const [newUser, setNewUser] = useState(false);
-  const inputIngredient = useRef(null);
+  const [recipes, setRecipes] = useContext(RecipesContext);
+  const [ingredients, setIngredients] = useContext(IngredientsContext);
 
   // Variables
   const router = useRouter();
 
   // Functions
-
   // - Helper functions
   const NewUserCheckFunction = () => {
     const searchParams = useSearchParams();
@@ -34,83 +36,40 @@ const Ingredients = () => {
       </div>
     )
   }
-
-  const addIngredients = () => {
-    let ingredientEntered = inputIngredient.current.value;
-    //*Change the condition here to check if it exists as a valid ingredient
-    if (ingredientEntered.length > 0) {
-      setIngredients(existingValues => [...existingValues, ingredientEntered]);
-    }
-  }
-
-  const editIngredients = (itemString) => {
-    const currArr = ingredients;
-    var index = currArr.indexOf(itemString);
-    if (index !== -1) {
-      currArr.splice(index, 1);
-      setIngredients(currArr);
-    }
-  }
-
+  
   // - Database Requests
+  
+  const getRecipesAvailable = (ingredients) => {
+    //Make call to backend to get recipes availabe
+    setRecipes(testRecipe);
+  }
+
   const IngredientsRequestDB = () => {
     if (newUser) {
       IngredientsPostRequestDB();
+
     } else {
       IngredientsPutRequestDB();
     }
+    getRecipesAvailable(ingredients);
+    router.push('recipes');
   }
 
   const IngredientsPostRequestDB = () => {
+    setIngredients(["apple","banana","green"])
     //*Add post request logic
-    router.push(`/dashboard`);
   }
-
-  // - Displayed Components
-  const IngredientsSearch = () => {
-    return (<div>
-      <input
-        className="text-center border-2 border-black"
-        type="text"
-        placeholder="Enter ingredients you have"
-        ref={inputIngredient}
-      />
-      <button onClick={addIngredients}>
-        click here
-      </button>
-    </div>);
-  }
-
-  const IngredientsBox = () => {
-    return ingredients.map((ingredient) =>
-      <li key={ingredient}>
-        {ingredient}
-        {edit ? <button onClick={() => editIngredients(ingredient)} >edit</button> : <></>}
-      </li>);
-  }
-
-  const EditIngredientsButton = () => {
-    setEdit(true);
-    return;
-  }
-
-  const SaveIngredientsButton = () => {
-    setEdit(false);
-    return;
+  const IngredientsPutRequestDB = () => {
+    //*Add post request logic
   }
 
   return (
-
     <div>
       <Suspense>
         <NewUserCheckFunction />
       </Suspense>
-      <IngredientsSearch />
-      <IngredientsBox />
-      {edit ?
-        <button onClick={SaveIngredientsButton}>Save</button> :
-        <button onClick={EditIngredientsButton}>Edit</button>}
-      <button onClick={IngredientsRequestDB}>
+      <IngredientSearch/>
+      <button onClick={IngredientsRequestDB} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-8" >
         Next
       </button>
     </div>

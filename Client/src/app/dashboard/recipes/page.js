@@ -58,7 +58,7 @@ const Recipes = () => {
         <RecipePage selectedIngredients={ingredients ? ingredients.split(',') : []} />
       </div>
       {/* Render RecipeCards component */}
-      <RecipeCards recipes={recipes} /> {/* Assuming you pass recipes to RecipeCards */}
+      {/* <RecipeCards recipes={recipes} /> Assuming you pass recipes to RecipeCards */}
     </div>
   );
 }

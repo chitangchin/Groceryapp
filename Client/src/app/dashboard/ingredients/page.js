@@ -2,11 +2,14 @@
 import { useState, useEffect, useRef, useContext, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation'
 
+
 //Context
 import IngredientsContext from '@/app/Context/ingredientsContext';
 
 //Components
 import IngredientSearch from '@/app/Components/IngredientSearch.js';
+ import AutocompleteSearch from '@/app/Components/AutoCompleteSearch.js';
+// import IngredientDummySearch from '@/app/Components/IngredientDummySearch.js';
 // import { useRouter } from 'next/router';
 import IngredientsBox from '@/app/Components/ingredientsBox'; //WORK IN PROGRESS
 
@@ -37,22 +40,7 @@ const Ingredients = () => {
     )
   }
 
-  // const addIngredients = () => {
-  //   let ingredientEntered = inputIngredient.current.value;
-  //   //*Change the condition here to check if it exists as a valid ingredient
-  //   if (ingredientEntered.length > 0) {
-  //     setIngredients(existingValues => [...existingValues, ingredientEntered]);
-  //   }
-  // }
 
-  // const editIngredients = (itemString) => {
-  //   const currArr = ingredients;
-  //   var index = currArr.indexOf(itemString);
-  //   if (index !== -1) {
-  //     currArr.splice(index, 1);
-  //     setIngredients(currArr);
-  //   }
-  // }
 
   // - Database Requests
   const IngredientsRequestDB = () => {
@@ -72,20 +60,6 @@ const Ingredients = () => {
     router.push(`/dashboard`);
   }
 
-  // - Displayed Components
-  // const IngredientSearch = () => {
-  //   return (<div>
-  //     <input
-  //       className="text-center border-2 border-black"
-  //       type="text"
-  //       placeholder="Enter ingredients you have"
-  //       ref={inputIngredient}
-  //     />
-  //     {/* <button onClick={addIngredients}>
-  //       click here
-  //     </button> */}
-  //   </div>);
-  // }
 
   const IngredientsBox = () => {
     return ingredients.map((ingredient) =>
@@ -95,15 +69,7 @@ const Ingredients = () => {
       </li>);
   }
 
-  // const EditIngredientsButton = () => {
-  //   setEdit(true);
-  //   return;
-  // }
-
-  // const SaveIngredientsButton = () => {
-  //   setEdit(false);
-  //   return;
-  // }
+  
   
 
   return (
@@ -113,6 +79,8 @@ const Ingredients = () => {
         <NewUserCheckFunction />
       </Suspense>
       <IngredientSearch />
+      {/* <AutocompleteSearch/> */}
+      {/* <IngredientDummySearch/> */}
       <IngredientsBox />
       {/* {edit ?
         <button onClick={SaveIngredientsButton}>Save</button> :

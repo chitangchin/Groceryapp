@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, useRef, useContext, Suspense } from 'react';
+import { useState, useEffect, useContext, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation'
 
 //Context
@@ -7,7 +7,7 @@ import IngredientsContext from '@/app/Context/ingredientsContext';
 import RecipesContext from '@/app/Context/recipeContextProvider';
 
 //Components
-import IngredientSearch from '../../Components/IngredientSearch';
+import IngredientSearch from '../../_components/IngredientSearch';
 
 //Test Data
 import { testRecipe } from '@/app/dummyData';
@@ -28,17 +28,18 @@ const Ingredients = () => {
     const searchParams = useSearchParams();
     let newUserCheck = searchParams.get('newUser');
     if (newUserCheck === "true") {
-      useEffect(() => {setNewUser(true)},[]);
+      useEffect(() => { setNewUser(true) }, []);
     }
+
     return (
       <div>
         {newUser ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
       </div>
     )
   }
-  
+
   // - Database Requests
-  
+
   const getRecipesAvailable = (ingredients) => {
     //Make call to backend to get recipes availabe
     setRecipes(testRecipe);
@@ -56,7 +57,7 @@ const Ingredients = () => {
   }
 
   const IngredientsPostRequestDB = () => {
-    setIngredients(["apple","banana","green"])
+    ingredients
     //*Add post request logic
   }
   const IngredientsPutRequestDB = () => {
@@ -68,7 +69,7 @@ const Ingredients = () => {
       <Suspense>
         <NewUserCheckFunction />
       </Suspense>
-      <IngredientSearch/>
+      <IngredientSearch />
       <button onClick={IngredientsRequestDB} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-8" >
         Next
       </button>

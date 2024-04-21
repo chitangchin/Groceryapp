@@ -3,6 +3,7 @@ const { dbConnect } = require('./db_config');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { verifyUser } = require('./middleware/auth.js');
+const { OK } = require('./constants.js');
 
 const app = express();
 const port = process.env.SERVER_PORT;
@@ -20,10 +21,18 @@ const userRouter = require('./routes/user.route.js');
 const spoonacular = require('./routes/spoonacular.route.js');
 const ingredientRouter = require('./routes/ingredient.route.js');
 const docsRouter = require('./routes/docs.route.js');
-app.use(cors({
-    origin: 'http://localhost:3000',  
-    credentials: true 
-}));
+
+app.use(
+    cors({
+        origin: 'http://localhost:3000',
+        credentials: true,
+    })
+);
+
+app.use('/', (req, res) => {
+    res.status(OK).json('Backend for DSD-Cohort-24 GroceryApp');
+});
+
 app.use('/user', userRouter);
 app.use('/docs', docsRouter);
 

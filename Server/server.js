@@ -9,6 +9,8 @@ const port = process.env.SERVER_PORT;
 
 app.use(express.json()); //Middleware to parse body for requests and responses
 app.use(cookieParser()); //Middleware to allow access to cookies
+
+//! For testing purposes, modify when production
 app.use(cors());
 
 dbConnect();
@@ -18,7 +20,10 @@ const userRouter = require('./routes/user.route.js');
 const spoonacular = require('./routes/spoonacular.route.js');
 const ingredientRouter = require('./routes/ingredient.route.js');
 const docsRouter = require('./routes/docs.route.js');
-
+app.use(cors({
+    origin: 'http://localhost:3000',  
+    credentials: true 
+}));
 app.use('/user', userRouter);
 app.use('/docs', docsRouter);
 

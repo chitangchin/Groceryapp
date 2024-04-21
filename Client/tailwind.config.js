@@ -11,7 +11,8 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        'login': "url('/images/ingredients-wallpaper-signup.jpg')"  
+        'login': "url('/images/ingredients-wallpaper-signup.jpg')",
+        'not-found': "url('/images/not-found-600.png')",  
       },
     },
   },

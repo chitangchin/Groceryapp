@@ -46,16 +46,16 @@ class UserController {
             try {
                 const registrationResponse = await userService.register(username, password);
                 if(registrationResponse.status == 200) {
-                    res.cookie(TOKEN, registrationResponse.token, {
+                res.cookie(TOKEN, registrationResponse.token, {
                         httpOnly: true,
                     });
                 }
-                res.status(registrationResponse.status).end(registrationResponse.message);
+                res.status(registrationResponse.status).json({"message": registrationResponse.message});
             } 
             catch(err) {
                 logger.error(err)
                 res.statusCode = INTERNAL_SERVER_ERROR;
-                res.end(UNEXPECTED_ERROR);   
+                res.json(UNEXPECTED_ERROR);   
             }
             
     }

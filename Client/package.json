@@ -10,13 +10,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "chart.js": "^4.4.2",
     "next": "^14.2.2",
+    "pino": "^8.20.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-fontawesome": "^1.7.1",
     "react-icons": "^5.1.0"
   },
   "devDependencies": {
+    "@iconify/tailwind": "^0.1.4",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",

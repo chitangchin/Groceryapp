@@ -49,6 +49,7 @@ class UserController {
                     });
                 }
                 res.status(registrationResponse.status).json({"status": registrationResponse.status, "message": registrationResponse.message, "token": registrationResponse.token, "id": registrationResponse.id, "username": registrationResponse.username});
+
             } 
             catch(err) {
                 logger.error(err)

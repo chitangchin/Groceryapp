@@ -11,10 +11,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 const logger = require('pino')()
 
-const register = process.env.REGISTER_USER_API
 export const RegisterForm = () => {
+  // const register_api = process.env.NEXT_PUBLIC_API_REGISTER
   const router = useRouter();
-
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,7 +45,7 @@ export const RegisterForm = () => {
 
     try{
 
-      const response = await fetch("https://groceryapp-backend-fqdms9kor-chitangchins-projects.vercel.app/user/register", {
+      const response = await fetch("https://groceryapp-backend-6r001gjdb-chitangchins-projects.vercel.app/user/register", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password, email }),

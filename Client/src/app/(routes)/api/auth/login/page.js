@@ -12,7 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const logger = require('pino')()
 
 export const Login = () => {
-const router = useRouter();
+    // const signin_api = process.env.NEXT_PUBLIC_API_LOGIN
+    const router = useRouter();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -25,7 +26,7 @@ const router = useRouter();
             return;
         }
         try{
-          const response = await fetch("http://localhost:8080/user/login", {
+          const response = await fetch("https://groceryapp-backend-6r001gjdb-chitangchins-projects.vercel.app/user/login", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),
@@ -34,8 +35,12 @@ const router = useRouter();
           if (!response.ok) {
             if (response.status === 404) {
               setError(data.message);
-            } else {
-              setError('Registration failed.');
+            }
+            else if (response.status === 401) {
+              setError(data.message);
+            }
+             else {
+              setError('Registration failed');
             }
             return;
           }

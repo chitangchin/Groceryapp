@@ -22,12 +22,12 @@ const spoonacular = require('./routes/spoonacular.route.js');
 const ingredientRouter = require('./routes/ingredient.route.js');
 const docsRouter = require('./routes/docs.route.js');
 
-app.use(
-    cors({
-        origin: 'http://localhost:3000',
-        credentials: true,
-    })
-);
+// app.use(
+//     cors({
+//         origin: 'http://localhost:3000',
+//         credentials: true,
+//     })
+// );
 
 app.get('/', (req, res) => {
     res.status(OK).json('Backend for DSD-Cohort-24 GroceryApp');

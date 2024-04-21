@@ -29,7 +29,7 @@ app.use(
     })
 );
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     res.status(OK).json('Backend for DSD-Cohort-24 GroceryApp');
 });
 

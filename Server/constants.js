@@ -28,8 +28,8 @@ const BAD_PASSWORD =
 const USERNAME_ALREADY_EXISTS = 'Username already exists';
 const REGISTRATION_SUCCESSFUL = 'Registration Successful!';
 const UNEXPECTED_ERROR =
-    'An unexpected error occurred.';
-const USER_DOESNT_EXIST = 'User does not exist.';
+    'An unexpected error occurred';
+const USER_DOESNT_EXIST = 'User does not exist';
 const INVALID_CREDENTIALS = 'Invalid credentials';
 const ERROR_LOGGING_IN = 'Error logging in';
 const SUCCESSFULLY_LOGGED_IN = 'Successfully logged in';

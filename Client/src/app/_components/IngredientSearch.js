@@ -3,7 +3,9 @@ import { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
+
 import IngredientsContext from '../Context/ingredientsContext';
+// import { GetRequest } from './fetchFunctions';
 
 const IngredientSearch = () => {
   const [ingredientSearch, setIngredientSearch] = useState('');
@@ -11,15 +13,22 @@ const IngredientSearch = () => {
   const [selectedIngredients, setSelectedIngredients] = useContext(IngredientsContext);
 
   // Dummy data for ingredient search autocomplete
-  const dummyIngredients = [
-    { id: 1, name: 'Tomato' },
-    { id: 2, name: 'Onion' },
-    { id: 3, name: 'Garlic' },
-    { id: 4, name: 'Chicken' },
-    { id: 5, name: 'Apple' },
-    { id: 6, name: 'applesauce' },
-    { id: 7, name: 'Broccoli' }
-  ];
+  async function getData() {
+    const response = await fetch("http://localhost:8080/ingredient",
+    {
+      method: "GET",
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Access-Control-Allow-Origin':'http://localhost:3000/',
+        'Content-Type': 'application/json',
+      }),
+      credentials: "include"
+    }
+  );
+    return await response.json();
+  }
+
+  getData()
 
   const handleSearchInputChange = (e) => {
     const query = e.target.value.toLowerCase();

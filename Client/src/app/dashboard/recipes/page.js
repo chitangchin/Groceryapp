@@ -4,11 +4,12 @@ import RecipesContext from '../../Context/recipeContextProvider.js';
 import UsernameContext from '@/app/Context/userContext.js';
 import LoggedInContext from '@/app/Context/loggedInContext.js';
 import IngredientsContext from '@/app/Context/ingredientsContext.js';
-//import RecipeCards from '@/app/Components/recipeCards.js'; // Corrected component name
 import Link from 'next/link'
 import Image from 'next/image'
 import { testRecipe } from '@/app/dummyData.js';
-//import RecipePage from '../components/RecipePage';
+import Navbar from '@/app/_components/navbar.js';
+
+import { useRouter } from 'next/router';
 
 const Recipes = ({ params }, amountRecipe) => {
   const { recipeId } = params;
@@ -52,6 +53,7 @@ const Recipes = ({ params }, amountRecipe) => {
 
   return (
     <div className="container mx-auto py-8">
+      <Navbar />
 <h1 className="text-3xl font-bold mb-4">Recipes</h1>
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

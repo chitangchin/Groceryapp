@@ -2,20 +2,23 @@
 import { useState, useEffect, useContext, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation'
 
+
 //Context
 import IngredientsContext from '@/app/Context/ingredientsContext';
 import RecipesContext from '@/app/Context/recipeContextProvider';
 
 //Components
-import IngredientSearch from '../../_components/IngredientSearch';
-
-//Test Data
+import IngredientSearch from '@/app/_components/IngredientSearch.js';
+ import AutocompleteSearch from '@/app/_components/AutoCompleteSearch.js';
+import IngredientsBox from '@/app/_components/ingredientsBox'; //WORK IN PROGRESS
+import UserContext from '@/app/Context/userContext';
 import { testRecipe } from '@/app/dummyData';
+import Navbar from '@/app/_components/navbar';
 
 const Ingredients = () => {
 
   // State
-  const [newUser, setNewUser] = useState(false);
+  const [newUser, setNewUser] = useContext(UserContext);
   const [recipes, setRecipes] = useContext(RecipesContext);
   const [ingredients, setIngredients] = useContext(IngredientsContext);
 
@@ -24,19 +27,6 @@ const Ingredients = () => {
 
   // Functions
   // - Helper functions
-  const NewUserCheckFunction = () => {
-    const searchParams = useSearchParams();
-    let newUserCheck = searchParams.get('newUser');
-    if (newUserCheck === "true") {
-      useEffect(() => { setNewUser(true) }, []);
-    }
-
-    return (
-      <div>
-        {newUser ? <a>Lets get started by adding ingredients you already have!</a> : <a></a>}
-      </div>
-    )
-  }
 
   // - Database Requests
 
@@ -53,6 +43,7 @@ const Ingredients = () => {
       IngredientsPutRequestDB();
     }
     getRecipesAvailable(ingredients);
+    setNewUser(false);
     router.push('recipes');
   }
 
@@ -66,9 +57,7 @@ const Ingredients = () => {
 
   return (
     <div>
-      <Suspense>
-        <NewUserCheckFunction />
-      </Suspense>
+      {newUser ? <a>Lets get started by adding some ingredients you have!</a> :  <Navbar/>}
       <IngredientSearch />
       <button onClick={IngredientsRequestDB} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-8" >
         Next

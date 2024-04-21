@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { RecipesProvider } from "./Context/recipeContextProvider";
 import { IngredientsProvider } from "./Context/ingredientsContext";
-import { UsernameProvider } from "./Context/userContext"
+import { UserProvider } from "./Context/userContext"
 import { LoggedInProvider } from "./Context/loggedInContext";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,13 +17,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <LoggedInProvider>
-        <UsernameProvider>
+        <UserProvider>
         <IngredientsProvider>
         <RecipesProvider>
           {children}
           </RecipesProvider>
         </IngredientsProvider>
-        </UsernameProvider>
+        </UserProvider>
         </LoggedInProvider>
           </body>
     </html>

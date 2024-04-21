@@ -1,3 +1,198 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.dashboard-container {
+  background-color: #f3f4f6;
+}
+
+.navbar-link {
+  color: #4a5568; /* Set text color */
+  transition: color 0.3s ease; /* Add transition for smooth color change */
+  border-radius: 4px; /* Add border radius */
+  padding: 0.5rem 1rem; /* Add padding */
+}
+
+.navbar-link:hover {
+  color: #2c5282; /* Change text color on hover */
+  background-color: #cbd5e0; /* Change background color on hover */
+}
+
+.hamburger-menu {
+  background-color: transparent; /* Make background transparent */
+  border: none; /* Remove border */
+  cursor: pointer; /* Change cursor to pointer */
+}
+#menu__toggle {
+  opacity: 0;
+}
+
+#menu__toggle:checked + .menu__btn > span {
+  transform: rotate(45deg);
+}
+
+#menu__toggle:checked + .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0deg);
+}
+
+#menu__toggle:checked + .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+#menu__toggle:checked ~ .menu__box {
+  right: 0; /* Changed from left: 0 */
+}
+
+.menu__btn {
+  position: fixed;
+  top: 20px;
+  right: 20px; /* Changed from left: 20px */
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #616161;
+  transition-duration: 0.25s;
+}
+
+.menu__btn > span::before {
+  content: '';
+  top: -8px;
+}
+
+.menu__btn > span::after {
+  content: '';
+  top: 8px;
+}
+
+.menu__box {
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  z-index: 1001; /* Ensure it's above the overlay */
+  background-color: #eceff1;
+
+  padding: 7px;
+  width: 300px;
+  height: 100%;
+  margin: 0;
+  padding: 80px 0;
+  list-style: none;
+  background-color: #eceff1;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  transition-duration: 0.25s;
+
+  border: 1px solid black;
+}
+
+.menu__item {
+  display: block;
+  padding: 12px 24px;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition-duration: 0.25s;
+}
+
+.menu__item:hover {
+  background-color: #cfd8dc;
+}
+#menuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Ensure it's on top */
+  display: none; /* Initially hidden */
+}
+.submenu {
+  display: none;
+}
+.light-theme {
+  background-color: white;
+  color: black;
+}
+
+.dark-theme {
+  background-color: black;
+  color: white;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.recipe-card {
+  flex: 0 0 20%; /* Adjust based on your preference */
+  margin: 0 10px;
+}
+
+.prev-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 0;
+}
+.recipe-card {
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  padding: 6px;
+  margin-bottom: 6px;
+}
+
+.recipe-title {
+  height: 50px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+}
+
+.recipe-image-container {
+  height: 180px;
+  overflow: hidden;
+}
+
+.recipe-image {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+}

@@ -1,5 +1,8 @@
 "use client";
 import { React, useState, createContext } from "react";
+import Image from 'next/image';
+
+
 
 const IngredientsContext = createContext();
 

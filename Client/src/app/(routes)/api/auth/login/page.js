@@ -1,10 +1,10 @@
 "use client"
 import React, { useRef, useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaUser } from "react-icons/fa";
-import { MdOutlineAlternateEmail } from "react-icons/md";
+// import { MdOutlineAlternateEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { CreateAccountInfo } from "@/app/_components/auth/register/CreateAccountInfo";
 

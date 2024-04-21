@@ -1,9 +1,10 @@
 import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { CreateAccountInfo } from "./CreateAccountInfo";
 import { MdOutlineAlternateEmail } from "react-icons/md";
+import UserContext from "@/app/Context/userContext";
 import Link from "next/link";
 export const RegisterForm = () => {
   const router = useRouter();
@@ -14,8 +15,10 @@ export const RegisterForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState("");
+  const [newuser, setNewuser] = useContext(UserContext)
 
   function handleSignUp() {
+    setNewuser(true);
       console.log('Signing up with:', username, email, password, repeatPassword);
       router.push('/login');
   }

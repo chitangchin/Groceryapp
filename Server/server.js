@@ -9,7 +9,10 @@ const port = process.env.SERVER_PORT;
 
 app.use(express.json()); //Middleware to parse body for requests and responses
 app.use(cookieParser()); //Middleware to allow access to cookies
-app.use(cors());
+app.use(cors({
+    origin : "http://localhost:3000/",
+    credentials: true, // <= Accept credentials (cookies) sent by the client
+  }))
 
 dbConnect();
 
@@ -21,6 +24,7 @@ const docsRouter = require('./routes/docs.route.js');
 
 app.use('/user', userRouter);
 app.use('/docs', docsRouter);
+
 
 app.use(verifyUser); //Requires valid JWT to access all routes below
 

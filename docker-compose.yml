@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./nextjs:/usr/src/app
+    environment:
+      - NODE_ENV=development
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./express:/usr/src/app
+    environment:
+      - NODE_ENV=development

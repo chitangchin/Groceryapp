@@ -2,8 +2,6 @@
 
 Grocery Management tool with built-in Recipe integration and macro counter. 
 
-![DSD-community](https://www.meetup.com/dallas-software-developers-meetup/)
-
 ## Table of Contents
 
 - [Project Overview](#project-overview)
